@@ -14,13 +14,17 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/template.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/schedule.css">
+
+
   <style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
 
   <body>
 
-    <nav class="navbar navbar-dark fixed-top flex-md-nowrap flex-sm-nowrap flex-xs-nowrap p-10 shadow" style="background-color: #861D21;">
-        <a class=" col-sm-3 col-md-2 mr-0" href="#" style="color: #f2f2f2">SPIRE</a>
+    <nav class="navbar navbar-dark fixed-top flex-md-nowrap flex-sm-nowrap flex-nowrap p-10 shadow" style="background-color: #861D21;">
+        <a class=" col-2 col-sm-2 col-md-2 col-lg-2 mr-0" href="#" style="color: #f2f2f2">SPIRE</a>
         <input class="form-control form-control-primary w-100" type="text" placeholder="Search SPIRE" aria-label="Search">
         <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
@@ -77,20 +81,143 @@
                 </ul>
               </div>
             </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Class Schedule</h1>
               <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2">
-                  <button class="btn btn-sm btn-outline-secondary">Search Classes</button>
+          
                   <button class="btn btn-sm btn-outline-secondary">Print</button>
                 </div>
 
               </div>
             </div>
-            </main>
 
+
+            <!--Schedule goes here! -->
+            <div class="ScheduleContainer">
+  
+                <div class="cd-schedule loading">
+  <div class="timeline">
+
+    <ul>
+
+      <li><span>08:00</span></li>
+      <li><span>08:30</span></li>
+      <li><span>09:00</span></li>
+      <li><span>09:30</span></li>
+      <li><span>10:00</span></li>
+      <li><span>10:30</span></li>
+      <li><span>11:00</span></li>
+      <li><span>11:30</span></li>
+      <li><span>12:00</span></li>
+      <li><span>12:30</span></li>
+      <li><span>13:00</span></li>
+      <li><span>13:30</span></li>
+      <li><span>14:00</span></li>
+      <li><span>14:30</span></li>
+      <li><span>15:00</span></li>
+      <li><span>15:30</span></li>
+      <li><span>16:00</span></li>
+      <li><span>16:30</span></li>
+      <li><span>17:00</span></li> 
+      <li><span>17:30</span></li>    
+      <li><span>18:00</span></li>
+      <li><span>18:30</span></li>
+
+     
+    </ul>
+  </div> <!-- .timeline -->
+
+  <div class="events">
+    <ul>
+      <li class="events-group">
+        <div class="top-info"><span>Monday</span></div>
+
+        <ul>
+          <li class="single-event" data-start="14:30" data-end="15:45" data-content="event-abs-circuit" data-event="event-1">
+            <a href="#0">
+              <em class="event-name">Garden Share</em>
+      
+              <em class="event-room"> French 102</em> 
+            </a>
+          </li>
+
+        
+        </ul>
+      </li>
+
+      <li class="events-group">
+        <div class="top-info"><span>Tuesday</span></div>
+
+        <ul>
+          <li class="single-event" data-start="11:30" data-end="12:45"  data-content="event-rowing-workout" data-event="event-2">
+            <a href="#0">
+              <em class="event-name">Algorithms</em>
+              <em class="event-room">Hasbrook 124</em>
+            </a>
+          </li>
+
+          <li class="single-event" data-start="13:00" data-end="14:15"  data-content="event-restorative-yoga" data-event="event-3">
+            <a href="#0">
+              <em class="event-name">Web Programming</em>
+              <em class="event-room">South College W245</em>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li class="events-group">
+        <div class="top-info"><span>Wednesday</span></div>
+
+        <ul>
+         
+        </ul>
+      </li>
+
+      <li class="events-group">
+        <div class="top-info"><span>Thursday</span></div>
+
+        <ul>
+          <li class="single-event" data-start="11:30" data-end="12:45"  data-content="event-rowing-workout" data-event="event-2">
+            <a href="#0">
+              <em class="event-name">Algorithms</em>
+              <em class="event-room">Hasbrook 124</em>
+            </a>
+          </li>
+
+          <li class="single-event" data-start="13:00" data-end="14:15"  data-content="event-restorative-yoga" data-event="event-3">
+            <a href="#0">
+              <em class="event-name">Web Programming</em>
+              <em class="event-room">South College W245</em>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="events-group">
+        <div class="top-info"><span>Friday</span></div>
+
+        <ul>
+          <li class="single-event" data-start="10:10" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2" room="Hasbrook 124">
+            <a href="#0">
+              <em class="event-name">Algorithms</em>
+              <em class="event-room">Hasbrook 124</em>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+
+            </div>
+            
+            </main>
         </div>
+
+      
 
 
       </div>
@@ -117,6 +244,15 @@
       feather.replace()
     </script>
 
+    <script src="./js/modernizer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script>
+    if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+  </script>
+  <script src="js/schedule.js"></script>
+
+
+   
     
 
 </body></html>
