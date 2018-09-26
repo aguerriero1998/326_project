@@ -13,7 +13,14 @@ Inspire
 * Connor Reardon, connor1733
 
 # Innovative Idea
-	Currently SPIRE is a pretty terrible system for registering for classes and setting up your next semester's schedule. SPIRE has an archaic search feature, lacks an appealing UI and it makes it difficult to easily see what you have signed up for already and what classes you should be signing up for based on your major and year. The goal behind this project is to bring the UI of SPIRE's class registration portion up to date, while making an application that is more user friendly and actually aids students in choosing which classes they should be taking. Our plan currently is to add a recommended class section to SPIRE, as well as refine the search features currently found within SPIRE. We will also be making it easier to view your schedule, while also formatting in a more appealing manner. All of these changes will be implemented on top of a more modern UI, as opposed to the more archaic interface SPIRE currently implements.
+	Currently SPIRE is a pretty terrible system for registering for classes and setting up your next semester's schedule. 
+	SPIRE has an archaic search feature, lacks an appealing UI and it makes it difficult to easily see what you have signed up
+	for already and what classes you should be signing up for based on your major and year. The goal behind this project is to
+	bring the UI of SPIRE's class registration portion up to date, while making an application that is more user friendly 
+	and actually aids students in choosing which classes they should be taking. Our plan currently is to add a recommended class 
+	section to SPIRE, as well as refine the search features currently found within SPIRE. We will also be making it easier to view 
+	your schedule, while also formatting in a more appealing manner. All of these changes will be implemented on top of a more 
+	modern UI, as opposed to the more archaic interface SPIRE currently implements.
 
 
 
