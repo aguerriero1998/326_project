@@ -9,8 +9,8 @@ Inspire
 * Christopher Doan, christopherdoan
 * Alexander Guerriero, aguerriero1998
 * Akshaya Bhattarai, theakshaya
-* Team Member Name 4, Github Username 4
-* Team Member Name 5, Github Username 5
+* Patrick Casey, PCasey3
+* Connor Reardon, connor1733
 
 # Innovative Idea
 
