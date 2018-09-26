@@ -8,7 +8,7 @@ Inspire
 
 * Christopher Doan, christopherdoan
 * Alexander Guerriero, aguerriero1998
-* Team Member Name 3, Github Username 3
+* Akshaya Bhattarai, theakshaya
 * Team Member Name 4, Github Username 4
 * Team Member Name 5, Github Username 5
 
