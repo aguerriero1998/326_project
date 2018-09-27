@@ -41,8 +41,37 @@ Inspire
 	friend social network system would also need some sort of graphing data to determine which students are friends with whom.
 # User Interface
 
-Provide a description and images of the user interface your
-application will intend on supporting.
 
-![example image](imgs/chick.jpg)
+This is the Dashboard page of Inspire. This page displays the schedule of the user once they are logged in. 
+
+
+
+![example image](imgs/dashboard.png)
+
+
+The following is the class search page. It provides multiple ways to search for classes. The classic search by class name and number can be found under general tab. Users can find classes by majors and the Gen-Ed requirments under respective tabs in this page. The last one here is Recommendations. This allows users to look for recommended classes as per their prior classes, major, current schedule and other student information.  
+
+
+
+![example image](imgs/class-search.png)
+
+
+Class Search results page displays the search results in organized manner. Each result appears as a button which can be expanded to show a grid of class information. The grid can be further expanded to view class Pre-Reqs, Reviews and other class details. The section number can be clicked to add that class in shopping cart. 
+
+
+![example image](imgs/search-result.png)
+
+
+Shopping cart page has two seperate tables to display information of the classes in the shopping cart and classes enrolled. Users can enroll in a class or delete the class from enrolled list or shopping cart using the buttons provided. 
+
+
+
+![example image](imgs/shopping-cart.png)
+
+Student information page displays the personal information of an user. This page also displays the classes taken by a student in current as well as past semesters. Update information button allows users to make changes to the personal information.
+
+
+![example image](imgs/Student-info.png)
+
+
 
