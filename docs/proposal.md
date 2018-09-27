@@ -71,6 +71,6 @@ Shopping cart page has two seperate tables to display information of the classes
 Student information page displays the personal information of an user. This page also displays the classes taken by a student in current as well as past semesters. Update information button allows users to make changes to the personal information.
 
 
-![example image](imgs/Student-info.png)
+![example image](imgs/student-info.png)
 
 
