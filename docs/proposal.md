@@ -74,4 +74,3 @@ Student information page displays the personal information of an user. This page
 ![example image](imgs/Student-info.png)
 
 
-
