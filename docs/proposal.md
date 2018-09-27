@@ -44,5 +44,9 @@ Inspire
 Provide a description and images of the user interface your
 application will intend on supporting.
 
-![example image](imgs/chick.jpg)
-
+![dashboard-1](imgs/dashboard1.png)
+![dashboard-2](imgs/dashboard2.png)
+![class-search](imgs/class-search1.png)
+![class-search2](imgs/class-search2.png)
+![class-search3](imgs/class-search3.png)
+![class-search4](imgs/class-search4.png)
