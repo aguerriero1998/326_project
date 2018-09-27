@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.1/examples/dashboard/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+            <meta name="author" content="">
+                <link rel="icon" href="./img/umass_logo.ico">
+                    
+                    <title>Template</title>
+                    
+                    <!-- Bootstrap core CSS -->
+                    <link href="./css/bootstrap.min.css" rel="stylesheet">
+                        
+                        <!-- Custom styles for this template -->
+                        <link href="./css/template.css" rel="stylesheet">
+                            <style type="text/css">/* Chart.js */
+                                @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+                                
+                                <--!adding style for collapsible -->
+                                .collapsible {
+                                    background-color: #777;
+                                    color: white;
+                                    cursor: pointer;
+                                    padding: 10px;
+                                    width: 35%;
+                                    border: none;
+                                    text-align: left;
+                                    outline: none;
+                                    font-size: 23px;
+                                }
+                            
+                            .active, .collapsible:hover {
+                                background-color: #00FFFF;
+                            }
+                            
+                            .content {
+                                padding: 0 18px;
+                                display: none;
+                                overflow: hidden;
+                                background-color: #f1f1f1;
+                            }
+                            <--!done adding collapsible style-->
+                            <!--adding style for grid-container -->
+                            .item1 { grid-area: section; }
+                            .item2 { grid-area: time; }
+                            .item3 { grid-area: room; }
+                            .item4 { grid-area: instructor; }
+                            .item5 { grid-area: capacity; }
+                            .item6 { grid-area: enrolled; }
+                            .item7 { grid-area: secdata; }
+                            .item8 { grid-area: timedata; }
+                            .item9 { grid-area: roomdata; }
+                            .item10 { grid-area: instdata; }
+                            .item11 { grid-area: capdata; }
+                            .item12 { grid-area: endata; }
+                            .item13 { grid-area: timedata2; }
+                            .item14 { grid-area: roomdata2; }
+                            .item15 { grid-area: instdata2; }
+                            .item16 { grid-area: capdata2; }
+                            .item17 { grid-area: endata2; }
+                            .item18 { grid-area: secdata2; }
+                            .item19 { grid-area: pre-req; }
+                            .item20 { grid-area: reviews; }
+                             .item21 { grid-area: details; }
+                             .item22 { grid-area: days; }
+                             .item23 { grid-area: daysdata; }
+                             .item24 { grid-area: daysdata2; }
+                            
+                           
+                            
+                            .grid-container {
+                                display: grid;
+                                grid-template-areas:
+                                'section time days room instructor capacity enrolled'
+                                'secdata timedata daysdata roomdata instdata capdata endata'
+                                'secdata2 timedata2 daysdata2 roomdata2 instdata2 capdata2 endata2'
+                                'pre-req  reviews reviews reviews details details details';
+                                
+                                
+                                grid-gap: 5px;
+                                background-color: #F5F5F5;
+                                padding: 10px;
+                            }
+                            .grid-container > div {
+                                background-color: rgba(255, 255, 255, 0.8);
+                                text-align: center;
+                                padding: 10px 0;
+                                font-size: 16px;
+                            }
+                           
+                           
+                            
+                            <!--Done adding style for grid-container -->
+                            
+                                </style></head>
+
+<body>
+    
+    <nav class="navbar navbar-dark fixed-top flex-md-nowrap flex-sm-nowrap flex-xs-nowrap p-10 shadow" style="background-color: #861D21;">
+        <a class=" col-sm-3 col-md-2 mr-0" href="#" style="color: #f2f2f2">SPIRE</a>
+        <input class="form-control form-control-primary w-100" type="text" placeholder="Search SPIRE" aria-label="Search">
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="#" style="color: #f2f2f2">Sign out</a>
+                </li>
+            </ul>
+            </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column ">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                Student Home <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                Class Search
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                Personal Information
+                            </a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                    
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Quick Links</span>
+                        <a class="d-flex align-items-center text-muted" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                Academic Requirements
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <button class="btn btn-sm btn-outline-secondary">Search Classes</button>
+                            <button class="btn btn-sm btn-outline-secondary">Print</button>
+                        </div>
+                        
+                    </div>
+                </div>
+                <h3>Class Search Results</h3>
+               
+               <button class="collapsible">CS 121 - Introduction to Problem Solving with Computers     (1 section)</button>
+                <div class="content">
+                    <div class="grid-container">
+                        <div class="item1"><b>Section</b></div>
+                        <div class="item2"><b>Time</b></div>
+                        <div class="item3"><b>Room</b></div>
+                        <div class="item4"><b>Instructor</b></div>
+                        <div class="item5"><b>Capacity</b></div>
+                        <div class="item6"><b>Enrolled</b></div>
+                        <div class="item7"> <input type="button" class="w3-btn w3-black" value="1"></div>
+                        <div class="item8">11:00pm-11:50pm</div>
+                        <div class="item9">ILC 111</div>
+                        <div class="item10">Gordon Anderson</div>
+                        <div class="item11">100</div>
+                        <div class="item12">50</div>
+                        <div class="item 22"><b>Days</b></div>
+                        <div class="item 23">Mon, Wed, Fri</div>
+                        <div class="item19"> <button class="collapsible">Pre-reqs</button>
+                            <div class="content">
+                                <p>none</p>
+                                
+                            </div>
+                        </div>
+                        <div class="item20"> <button class="collapsible">Reviews</button>
+                            <div class="content">
+                                <p>Very easy class</p>
+                                <p>Super fun</p>
+                                <p>Get ready for some java fun</p></div>
+                            </div>
+                        
+                        <div class="item21"> <button class="collapsible">Details</button>
+                            <div class="content">
+                                <p> Class details, textbook, override and other important information</p>
+                            </div>
+                            </div>
+                            
+                       
+                        
+                    </div>
+                </div>
+                
+               <p></p>
+                <button class="collapsible">CS 187 - Programming with Data Structures     (1 section)</button>
+                <div class="content">
+                   
+                    <div class="grid-container">
+                        <div class="item1"><b>Section</b></div>
+                        <div class="item2"><b>Time</b></div>
+                        <div class="item3"><b>Room</b></div>
+                        <div class="item4"><b>Instructor</b></div>
+                        <div class="item5"><b>Capacity</b></div>
+                        <div class="item6"><b>Enrolled</b></div>
+                        <div class="item7"> <input type="button" class="w3-btn w3-black" value="1"></div>
+                        <div class="item8">12:05pm-1:00pm</div>
+                        <div class="item9">ILC 222</div>
+                        <div class="item10">MR Professor</div>
+                        <div class="item11">100</div>
+                        <div class="item12">50</div>
+                        <div class="item 22"><b>Days</b></div>
+                        <div class="item 23">Mon, Wed, Fri</div>
+                        <div class="item19"> <button class="collapsible">Pre-reqs</button>
+                            <div class="content">
+                                <p>CS-121</p>
+                                
+                            </div>
+                        </div>
+                        <div class="item20"> <button class="collapsible">Reviews</button>
+                            <div class="content">
+                                <p>The iron gate of UMass CS</p>
+                                <p>Good luck, you will need it.</p>
+                                <p>C's get degrees right?</p></div>
+                            </div>
+                        <div class="item21"> <button class="collapsible">Details</button>
+                            <div class="content">
+                                <p> Class details, textbook, override and other important information</p>
+                            </div>
+                            </div>
+                            
+                       
+                    </div>
+                </div>
+                
+                <p></p>
+                <button class="collapsible">CS 250 - Theory of Computation     (2 sections)</button>
+                <div class="content">
+                    <div class="grid-container">
+                        <div class="item1"><b>Section</b></div>
+                        <div class="item2"><b>Time</b></div>
+                        <div class="item3"><b>Room</b></div>
+                        <div class="item4"><b>Instructor</b></div>
+                        <div class="item5"><b>Capacity</b></div>
+                        <div class="item6"><b>Enrolled</b></div>
+                        <div class="item7"> <input type="button" class="w3-btn w3-black" value="1"></div>
+                        <div class="item8">11:00pm-11:50pm</div>
+                        <div class="item9">ILC 333</div>
+                        <div class="item10">DMB</div>
+                        <div class="item11">100</div>
+                        <div class="item12">50</div>
+                        <div class="item13">1pm-2pm</div>
+                        <div class="item14">CICS 200</div>
+                        <div class="item15">DMB</div>
+                        <div class="item16">110</div>
+                        <div class="item17">99</div>
+                        <div class="item 22"><b>Days</b></div>
+                        <div class="item 23">Mon, Wed, Fri</div>
+                        <div class="item 24">Mon, Wed, Fri</div>
+                        <div class="item18"> <input type="button" class="w3-btn w3-black" value="2"></div>
+                        <div class="item19"> <button class="collapsible">Pre-reqs</button>
+                        <div class="content">
+                            <p>CS-121</p>
+                            <p>CS-187</p>
+                            
+                            </div>
+                        </div>
+                        <div class="item20"> <button class="collapsible">Reviews</button>
+                            <div class="content">
+                                <p>O boy, you thought 187 was tough.</p>
+                                <p>Lots of proofs</p>
+                                </div>
+                            </div>
+                            
+                            <div class="item21"> <button class="collapsible">Details</button>
+                                <div class="content">
+                                    <p> Class details, textbook, override and other important information</p>
+                                </div>
+                                
+                        
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    
+               
+               
+        
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                                         console.log(coll.length);
+                                         this.classList.toggle("active");
+                                         var content = this.nextElementSibling;
+                                         if (content.style.display === "block") {
+                                         content.style.display = "none";
+                                         } else {
+                                         content.style.display = "block";
+                                         }
+                                         });
+            }
+        </script>
+        
+        </main>
+        
+    </div>
+    
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Bootstrap core JavaScript
+     ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    
+    <!-- Icons -->
+    <script src="./js/feather.min.js"></script>
+    <script>
+        feather.replace()
+        </script>
+    
+    
+    
+</body></html>
