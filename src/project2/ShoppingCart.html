@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.1/examples/dashboard/ -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./img/umass_logo.ico">
+    <title>Shopping Cart</title>
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/template.css" rel="stylesheet">
+    <link href="css/ShoppingCart.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top flex-md-nowrap flex-sm-nowrap flex-nowrap p-10 shadow" style="background-color: #861D21;">
+        <a class=" col-2 col-sm-2 col-md-2 col-lg-2 mr-0" href="#0" style="color: #f2f2f2">SPIRE</a>
+        <input class="form-control form-control-primary w-100" type="text" placeholder="Search SPIRE" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#" style="color: #f2f2f2">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column ">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                Student Home 
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                    <polyline points="2 17 12 22 22 17"></polyline>
+                                    <polyline points="2 12 12 17 22 12"></polyline>
+                                </svg>
+                                Class Search
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                Personal Information
+                            </a>
+                        </li>
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                  <span>Quick Links</span>
+                  <a class="d-flex align-items-center text-muted" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                  </a>
+                </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                                Academic Requirements
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-3">
+                    <h1 class="h2">Shopping Cart</h1>   
+                    </div>
+                </div>
+    </div>
+<!--Shopping Cart pieces goes here! -->
+
+
+          <table class="table table-bordered shoppingCartTabl">
+            <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Class Name</th>
+                      <th scope="col">Professor</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Credits</th>
+                      <th scope="col">Select</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">CS 335</th>
+                      <td>Charles Weems</td>
+                      <td>South College W246</td>
+                      <td>TuTh 2:30 PM - 3:45 PM</td>
+                      <td>3</td>
+                      <td><input type="checkbox" value=""></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Math 471</th>
+                      <td>Luibomir Chiriac</td>
+                      <td>Goessmann 124</td>
+                      <td>TuTh 10:00 AM - 11:15 AM</td>
+                      <td>3</td>
+                      <td><input type="checkbox" value=""></td>
+                    </tr>
+                  </tbody>
+                </table>
+    
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <div class = "row">
+                <div class = "enroll">
+                    <button type="enroll" class="btn btn-secondary">Enroll</button>
+                 </div>
+                <div class = "delete">
+                    <button type="delete" class="btn btn-secondary">Delete</button>
+                </div>
+              </div>
+            </div>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-3">
+            <div class = "row">
+                <h1 class = "enrolledClasses">Enrolled Classes</h1>
+            </div>
+        </div>
+
+        
+            <table class = "table table-bordered enrolledClassesTable">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Class Name</th>
+                                  <th scope="col">Professor</th>
+                                  <th scope="col">Location</th>
+                                  <th scope="col">Time</th>
+                                  <th scope="col">Credits</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">CS 326</th>
+                                  <td>Tim Richards</td>
+                                  <td>South College W246</td>
+                                  <td>TuTh 1:00 PM - 2:15 PM</td>
+                                  <td>3</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">CS 250</th>
+                                  <td>David Barrington</td>
+                                  <td>Goessmann 64</td>
+                                  <td>MWF 1:25 PM - 2:15 PM</td>
+                                  <td>4</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">CS 230</th>
+                                  <td>Meng Chieh Chiu</td>
+                                  <td>Goessmann 64</td>
+                                  <td>TuTh 11:30 AM - 12:45 PM</td>
+                                  <td>4</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Music 150</th>
+                                  <td>Marianna Ritchey</td>
+                                  <td>Herter 224</td>
+                                  <td>W 6:00 PM - 7:15 PM</td>
+                                  <td>4</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        
+        
+
+
+                
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="./js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script>
+        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+        </script>
+        <script src="./js/popper.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- Icons -->
+        <script src="./js/feather.min.js"></script>
+        <script>
+        feather.replace()
+        </script>
+        <script src="./js/modernizer.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script>
+        if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+        </script>
+        <script src="js/schedule.js"></script>
+</body>
+
+</html>
