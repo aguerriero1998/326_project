@@ -33,7 +33,6 @@ class CourseInstance(models.Model):
     textbook = models.CharField(max_length=25)
     students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
-    days = ArrayField(models.CharFIeld(max_length=15),size=7)
 
     def __str__(self):
         """String for representing the Model object."""
@@ -56,6 +55,7 @@ class Student(models.Model):
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
     coursestaken = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
+    shoppingcart = models.ForeignKey("CourseInstance", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         """String for representing the Model object."""
