@@ -33,7 +33,7 @@ class CourseInstance(models.Model):
     textbook = models.CharField(max_length=25)
     students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
-    days = models.ArrayField(models.CharFIeld(max_length=15),size=7)
+    days = ArrayField(models.CharFIeld(max_length=15),size=7)
 
     def __str__(self):
         """String for representing the Model object."""
