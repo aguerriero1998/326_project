@@ -33,8 +33,10 @@ class CourseInstance(models.Model):
     textbook = models.CharField(max_length=25)
     students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
-    days = models.ArrayField(models.CharFIeld(max_length=15),size=7)
-
+    days = models.ManyToManyField("Days")
+    studentname = models.ManyToManyField("Student")
+    coursestaken = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True)
+    
     def __str__(self):
         """String for representing the Model object."""
         return self.name
@@ -52,10 +54,20 @@ class Student(models.Model):
     name = models.CharField(max_length=25)
     idnumber = models.IntegerField(validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
     email = models.EmailField(max_length=25)
+    phonenumber = models.CharField(max_length=12)
     gender = models.CharField(max_length=25)
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
-    coursestaken = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
+    coursestaken = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
+    coursesnow = models.ManyToManyField("CourseInstance")
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.name
+
+class Days(modes.Model):
+    days = models.ManyToManyField("CourseInstance")
+    name = models.CharField(max_length=15)
 
     def __str__(self):
         """String for representing the Model object."""
