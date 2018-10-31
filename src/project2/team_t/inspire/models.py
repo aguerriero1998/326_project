@@ -15,7 +15,7 @@ class Course(models.Model):
     comments =  models.TextField(max_length=100)
     gened =  models.CharField(max_length=3)
     major =  models.CharField(max_length=25)
-    reccomendation =  models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
+    recommendation =  models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         """String for representing the Model object."""
