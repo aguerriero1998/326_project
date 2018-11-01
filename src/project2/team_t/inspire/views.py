@@ -22,15 +22,16 @@ def dashboard(request):
         "num_instances_available": num_instances_available,
         "num_authors": num_authors,
     }
-"""
-    def get_list(day):
+    """
+    
+    """def get_list(day):
         student = Student.objects.filter(idnumber = self.idnumber)
         course_taking = student.objects
         listOfdicts = []
         length = range(len(q1))
         for i in length:
             dict = {"key": q1[i].name, }
-            listOfdicts.append(dict)
+            listOfdicts.append(dict) """
     
     context = {}
 
