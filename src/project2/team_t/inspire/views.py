@@ -24,7 +24,8 @@ def dashboard(request):
     }
 """
     def get_list(day):
-        q1 = Student.coursesnow.days.filter(name=day)
+        student = Student.objects.filter(idnumber = self.idnumber)
+        course_taking = student.objects
         listOfdicts = []
         length = range(len(q1))
         for i in length:
