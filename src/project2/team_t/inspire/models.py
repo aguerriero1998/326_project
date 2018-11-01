@@ -43,7 +43,7 @@ class CourseInstance(models.Model):
 
 class Professor(models.Model):
     name = models.CharField(max_length=20, help_text='Enter a name')
-    taught = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
+    taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
     review = models.TextField(max_length=100)
 
     def __str__(self):
