@@ -22,7 +22,7 @@ for i in range(1,50):
     a_comments = fake.text(100)
     a_gened = fake.text(3)
     a_major = fake.text(25)
-    #figure out later
+    #add in later?
     #a_recommendation = 
 
     #Makes the new fake Course object
@@ -43,7 +43,7 @@ for i in range(1,50):
 courseInstances = []
 for i in range(1,50):
     a_name = fake.text(20)
-    prof =
+    prof = 
 
 
 username = "admin"
