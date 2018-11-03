@@ -6,9 +6,9 @@ Primary style
 }
 
 body {
-  font-size: 1.0rem;
-  font-family: "Source Sans Pro", sans-serif;
-  color: #222222;
+  
+  
+  
   background-color: white;
 }
 
@@ -18,22 +18,20 @@ ul {
 
 
 
-a {
-  color: #A2B9B2;
-  text-decoration: none;
-  overflow: scroll;
-}
-
 /* -------------------------------- 
 Main Components 
 -------------------------------- */
 .cd-schedule {
+  color: #222222;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1.0rem;
   position: relative;
   margin: 2em 0;
 }
 
 .cd-schedule .single-event a{
-  text-decoration: none
+  text-decoration: none;
+  text-overflow: scroll
 
 }
 
