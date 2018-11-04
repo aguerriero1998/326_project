@@ -74,4 +74,3 @@ class Days(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.name
-
