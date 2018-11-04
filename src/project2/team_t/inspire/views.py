@@ -5,15 +5,15 @@ from django.views import generic
 # Create your views here.
 def dashboard(request, idnumber):
     def get_list(day):
-        courses_taking = CourseInstance.objects.filter(students = idnumber)
-        courses_taking = courses_taking.filter(days = day)
+        courses_taking = CourseInstance.objects.filter(days__name = day)
+        courses_taking = courses_taking.filter(studentname__idnumber = idnumber)
         listOfdicts = []
         length = range(len(courses_taking))
-        for i in length:
-            dict = {"key": courses_taking[i].name,
-            "room": courses_taking[i].location,
-            "start": courses_taking[i].time,
-            "end": courses_taking[i].time}
+        for p in courses_taking:
+            dict = {"name": p.name,
+            "room": p.location,
+            "start": p.start,
+            "end": p.end}
             listOfdicts.append(dict)
         return listOfdicts
 
