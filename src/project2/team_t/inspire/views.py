@@ -36,7 +36,7 @@ def search_results(request):
 
     return render(request, "search-results.html", context=context)
 
-def shopping_cart(request):
+def shopping_cart(request, pk):
     context = {}
 
     return render(request, "ShoppingCart.html", context=context)
@@ -51,7 +51,7 @@ class profDetailView(generic.DetailView):
 
 class courseDetailView(generic.DetailView):
     model = Course
-    template_name = "course-description.html"
+    template_name = "courseinfo.html"
 
     """View function for home page of site.
     # Generate counts of some of the main objects

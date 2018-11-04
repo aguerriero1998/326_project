@@ -8,7 +8,7 @@ urlpatterns = [
     path("shopping-cart/<int:pk>", views.shopping_cart, name="shopping_cart"),
     path("studentinfo/<int:pk>", views.studentinfo.as_view(), name="studentinfo"),
     path("course/<int:pk>", views.courseDetailView.as_view(), name="courseinfo"),
-    path("professors/<int:pk>", views.profDetailView.as_view(), name="professorinfo"),
+    path("professors/<str:pk>", views.profDetailView.as_view(), name="professorinfo"),
     
     
     

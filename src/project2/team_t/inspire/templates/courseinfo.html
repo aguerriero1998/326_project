@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Course Info</h1>
+
+	    </div>
+	    	<dl class="info">
+		      <dt>Name</dt>
+		      <dd>{{ course.name }}</dd>
+		      <dt>Rating</dt>
+          <dd>{{ course.rating }}</dd>
+          <--- TODO TEMPLATIZE THIS!!!! ---> 
+          <dt> Reviews</dt>
+          <dd>
+          <ul>
+            <li>
+              Best Professor I have had in college. Inspirational and makes you 
+              critically think about what he teaches. If you go to class you should 
+              have a sound understanding of the material and pass with a good grade.
+            </li>
+            <li>
+              I've taken all of his course. He's the best lecturer I've ever seen, 
+              which is good because you need to go to lecture to pass any of his classes. 
+              Extremely intelligent and competent, he expects his students to work as 
+              hard as he does in his classes. A tough but fair grader. If you are 
+              willing to work, you will learn a lot.
+            </li>
+          </ul>
+          </dd>
+		</dl>
+		
+{% endblock %}

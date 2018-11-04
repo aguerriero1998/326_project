@@ -8,7 +8,7 @@ class Course(models.Model):
         Model representing a course at UMass (e.g CS326, CS311).
         """
     name = models.CharField(max_length=20, help_text='Enter a class name')
-    coursenumber = models.IntegerField(validators=[MaxValueValidator(80000), MinValueValidator(70000)])
+    coursenumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(80000), MinValueValidator(70000)])
     description =  models.TextField(max_length=100)
     credits =  models.IntegerField(validators=[MaxValueValidator(4), MinValueValidator(1)])
     rating =  models.DecimalField(max_digits=3, decimal_places=2)
@@ -45,7 +45,7 @@ class CourseInstance(models.Model):
         return self.name
 
 class Professor(models.Model):
-    name = models.CharField(max_length=20, help_text='Enter a name')
+    name = models.CharField(primary_key=True, max_length=20, help_text='Enter a name')
     taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, blank = True)
     review = models.TextField(max_length=100)
     
@@ -55,7 +55,7 @@ class Professor(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=25)
-    idnumber = models.IntegerField(validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
+    idnumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
     email = models.EmailField(max_length=25)
     phonenumber = models.CharField(max_length=12)
     gender = models.CharField(max_length=25)
