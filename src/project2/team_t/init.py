@@ -65,10 +65,12 @@ for i in range(1,20):
                                     textbook = a_textbook,
                                     students = a_students,
                                     available = a_available,
-                                    days = a_days,
-                                    studentname = a_studentname,
     )
     courseInstance.save()
+    #courseInstance.days.add(a_days)
+    #courseInstance.studentname.add(a_studentname)
+
+    #courseInstance.save()
     courseInstances.append(CourseInstance)
 
 #Professor portion of the data model w/ fake data
@@ -76,6 +78,7 @@ professors = []
 for i in range(1,20):
     a_name = fake.name()
     #TODO implement courses taught later
+    #a_taught
     a_review = fake.text(100)
 
     professor = Professor(
