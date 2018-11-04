@@ -6,9 +6,6 @@ Primary style
 }
 
 body {
-  
-  
-  
   background-color: white;
 }
 
@@ -27,11 +24,13 @@ Main Components
   font-size: 1.0rem;
   position: relative;
   margin: 2em 0;
+
 }
 
 .cd-schedule .single-event a{
   text-decoration: none;
   text-overflow: scroll
+
 
 }
 
@@ -70,10 +69,12 @@ Main Components
     height: 100%;
     width: 100%;
     padding-top: 50px;
+
   }
   .cd-schedule .timeline li {
     position: relative;
     height: 50px;
+
   }
   .cd-schedule .timeline li::after {
     /* this is used to create the table horizontal lines */
@@ -294,14 +295,14 @@ Main Components
 @media only screen and (min-width: 800px) {
   .cd-schedule .event-name,
   .cd-schedule .event-room {
-    font-size: .95rem;
+    font-size: .80rem;
 
   }
 }
 
 .cd-schedule .event-date {
   /* they are not included in the the HTML but added using JavScript */
-  font-size: 1.0rem;
+  font-size: .9rem;
   opacity: .7;
   line-height: 1.2;
   margin-bottom: .2em;
