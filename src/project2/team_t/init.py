@@ -114,7 +114,6 @@ for i in range(1,20):
                         emergency = a_emergency,
                         #coursesnow = a_coursesNow,
     )
-
     student.save()
     students.append(student)
 
