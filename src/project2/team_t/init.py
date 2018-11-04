@@ -42,7 +42,7 @@ for i in range(1,20):
 courseInstances = []
 for i in range(1,20):
     a_name = fake.text(20)
-    #TODO add in prof at the end!!!!!
+    #TODO add in prof at the end
     a_classNumber = fake.random_int(70000,80000)
     a_time = fake.time(pattern="%H:%M", end_datetime=None)
     #TODO add in prerequisites at the end
@@ -100,10 +100,23 @@ for i in range(1,20):
     a_gender = gender[fake.random_int(0,1)]
     a_pronouns = pronouns[fake.random_int(0,1)]
     a_emergency = fake.text(20)
-    #TODO figure out coursesTaken and shoppingCart
-    a_coursesNow = courseInstances[fake.random_int(0,19)]
+    #a_coursesTaken =
+    #a_shoppingCart = 
+    #a_coursesNow = courseInstances[fake.random_int(0,19)]
 
+    student = Student(
+                        name = a_name,
+                        idnumber = a_idnumber,
+                        email = a_email,
+                        phonenumber = a_phonenumber,
+                        gender = a_gender,
+                        pronouns = a_pronouns,
+                        emergency = a_emergency,
+                        #coursesnow = a_coursesNow,
+    )
 
+    student.save()
+    students.append(student)
 
 username = "admin"
 password = "admin"
