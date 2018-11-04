@@ -33,7 +33,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(CourseInstance)
 class CourseInstanceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','time', 'location', 'textbook','students', 'available')
+    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start','end', 'location', 'textbook','students', 'available')
     inlines = [
         CourseInstanceInline3
     ]

@@ -95,7 +95,7 @@ class Days(models.Model):
             max_length=2,
             choices=OFFERED,
             blank=True,
-            default="m"
+            default="m",
             help_text="Days offered",
     )
 
