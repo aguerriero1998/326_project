@@ -14,6 +14,11 @@ class StudentInline1(admin.TabularInline):
     model = Student
     fk_name = "coursestaken"
 
+class CourseInstanceInline3(admin.TabularInline):
+    model = Student.coursesnow.through
+    extra = 1
+
+
 
 
 
@@ -27,8 +32,10 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(CourseInstance)
 class CourseInstanceAdmin(admin.ModelAdmin):
     list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','time', 'location', 'textbook','students', 'available')
-#inlines = [StudentInline1]
-
+    inlines = [
+        CourseInstanceInline3
+    ]
+    exclude = ( 'coursesnow', )
 
 
 
@@ -39,7 +46,7 @@ class ProfessorAdmin(admin.ModelAdmin):
     list_display = ('name', 'review' )
 
     inlines = [CourseInstanceInline1]
-#because courseInstance has foreignkey to professor
+
 
 
 
@@ -48,15 +55,12 @@ class ProfessorAdmin(admin.ModelAdmin):
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency')
     fields = ['name','idnumber','email','phonenumber','gender','pronouns', 'emergency']
+    inlines = [CourseInstanceInline3]
 
 admin.site.register(Days)
 
 
 
 
-#course has foreignkey to courseInstance
-#CourseInstance has foreignkey to professor and Course
-#professor has foreignkey to courseInstance
-#Students have foreignkey to course
 
 
