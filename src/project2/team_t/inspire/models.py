@@ -29,6 +29,8 @@ class CourseInstance(models.Model):
     classnumber = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
     time = models.TimeField(null=True, blank=True)
     prerequisites = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, related_name='prerequisites', blank = True)
+    start = models.TimeField(null=True, blank=True) 
+    end = models.TimeField(null=True, blank=True)
     semester = models.CharField(max_length=6)
     location = models.CharField(max_length=25)
     textbook = models.CharField(max_length=25)
