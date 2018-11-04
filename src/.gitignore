@@ -104,6 +104,7 @@ venv.bak/
 .mypy_cache/
 **/.DS_STORE
 
-**/.swp
+**/*.swp
 
 **/db.sqlite3
+../.DS_Store
