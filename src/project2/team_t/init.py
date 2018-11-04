@@ -20,7 +20,7 @@ for i in range(1,20):
     a_credits = fake.random_int(1,4)
     a_rating = fake.random_int(100, 500)/100
     a_comments = fake.text(100)
-    a_gened = fake.text(3)
+    a_gened = fake.text(5)
     a_major = fake.text(25)
     #add in later?
     #a_recommendation = 
@@ -79,7 +79,7 @@ for i in range(1,20):
     a_review = fake.text(100)
 
     professor = Professor(
-                        name = a_name
+                        name = a_name,
                         review = a_review
     )
     professor.save()
@@ -110,17 +110,3 @@ adminuser.save()
 adminuser.is_superuser = True
 adminuser.is_staff = True
 adminuser.save()
-message = f"""
-====================================================================
-The database has been setup with the following credentials:
-  username: {username}
-  password: {password}
-  email: {email}
-You will need to use the username {username} and password {password}
-to login to the administrative webapp in Django.
-Please visit http://localhost:8080/admin to login to the admin app.
-Run the django server with:
-  $ python3 manage.py runserver 0.0.0.0:8080"
-====================================================================
-"""
-print(message)
