@@ -17,8 +17,10 @@ class StudentInline1(admin.TabularInline):
 class CourseInstanceInline3(admin.TabularInline):
     model = Student.coursesnow.through
     extra = 1
-
-
+    
+class CourseInstanceInline4(admin.TabularInline):
+    model = Student.shoppingcart.through
+    extra = 1
 
 
 
@@ -38,8 +40,6 @@ class CourseInstanceAdmin(admin.ModelAdmin):
     exclude = ( 'coursesnow', )
 
 
-
-
     
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
@@ -53,8 +53,8 @@ class ProfessorAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency')
-    fields = ['name','idnumber','email','phonenumber','gender','pronouns', 'emergency']
+    list_display = ('name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency','get_shoppingcart','get_coursestaken')
+    #fields = ['name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency','coursestaken','shoppingcart']
     inlines = [CourseInstanceInline3]
 
 admin.site.register(Days)
