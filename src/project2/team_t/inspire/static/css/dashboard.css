@@ -99,3 +99,10 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
 
+* {
+  font-family: 'Droid Serif', Georgia, Times, serif;
+}
+
+.sidebar, .navbar, th, h1, h2, .h2, dt {
+  font-family: 'Droid Sans', Helvetica, Arial, sans-serif; 
+}
