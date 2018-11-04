@@ -45,8 +45,9 @@ class CourseInstance(models.Model):
 class Professor(models.Model):
     name = models.CharField(max_length=20, help_text='Enter a name')
     taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
-    review = models.TextField(max_length=100)
-
+    review = models.ManyToManyField('Reviews')
+    rating =  models.DecimalField(max_digits=3, decimal_places=2)
+    
     def __str__(self):
         """String for representing the Model object."""
         return self.name
@@ -91,6 +92,11 @@ class Days(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.name
+
+class Reviews(models.Model):
+    remarks = models.TextField(max_length=200)
+    giver = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
+
 
 
 
