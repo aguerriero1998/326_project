@@ -72,6 +72,22 @@ class Days(models.Model):
     daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek')
     name = models.CharField(max_length=15)
 
+    OFFERED = (
+            ("m", "Monday"),
+            ("tu", "Tuesday"),
+            ("w", "Wednesday"),
+            ("th", "Thursday"),
+            ("f", "Friday"),
+    )
+
+    daysoffered = models.CharField(
+            max_length=2,
+            choices=OFFERED,
+            blank=True,
+            default="m"
+            help_text="Days offered",
+    )
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name
