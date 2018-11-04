@@ -60,13 +60,24 @@ class Student(models.Model):
     gender = models.CharField(max_length=25)
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
-    coursestaken = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
-    coursesnow = models.ManyToManyField("CourseInstance", related_name='coursesnow')
-    shoppingcart = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, related_name='shoppingcart')
-
+    coursestaken = models.ManyToManyField('Course')
+    coursesnow = models.ManyToManyField('CourseInstance', related_name='coursesnow')
+    shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart')
+    
     def __str__(self):
         """String for representing the Model object."""
         return self.name
+    
+    def get_shoppingcart(self):
+        return ", ".join(shoppingcart.name for genre in self.shoppingcart.all()[:3])
+    get_shoppingcart.short_description = "Shopping Cart"
+
+    def get_coursestaken(self):
+        return ", ".join(coursestaken.name for genre in self.coursestaken.all()[:3])
+    get_shoppingcart.short_description = "Courses Taken"
+
+    
+
 
 class Days(models.Model):
     daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek')
