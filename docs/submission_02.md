@@ -11,7 +11,7 @@ The course instance class holds data having to do with specific offerings of the
 where the course is held, and the professor teaching the course. The professors class is used to store information about
 professors like their name, previously taught courses, and reviews about their previous classes. The student class has
 student information like their name, address, and emergency contact. The days class is used to represent which days of the week
-course instance is offered. Course is connected to course instance which is connected to the rest of the models.
+course instance is offered. The reviews class has a review left by a student for a professor and a link to the student that gave the review. Course is connected to course instance which is connected to the rest of the models.
 
 ADD INFO ABOUT URLS AND VIEWS HERE
 

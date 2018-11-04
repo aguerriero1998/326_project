@@ -1,5 +1,5 @@
 I worked mainly on the database model for this part of the project. For example, I made the visual model in google slides.
-This model represents the courses, course instances, professors, students, and days the course is offered. 
+This model represents the courses, course instances, professors, reviews, students, and days the course is offered. 
 
 Also, I implemented the Django ORM in python using the sqlite3 database. For this part I made five classes corresponding to the 
 database model I made in google slides. I also represented all of the information that we need about courses, students, and
