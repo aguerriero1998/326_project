@@ -27,8 +27,9 @@ class CourseInstance(models.Model):
     name = models.CharField(max_length=20, help_text='Enter a class name')
     prof = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
     classnumber = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
-    time = models.TimeField(null=True, blank=True)
     prerequisites = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, related_name='prerequisites', blank = True)
+    start = models.TimeField(null=True, blank=True) 
+    end = models.TimeField(null=True, blank=True)
     semester = models.CharField(max_length=6)
     location = models.CharField(max_length=25)
     textbook = models.CharField(max_length=25)
@@ -62,16 +63,31 @@ class Student(models.Model):
     coursestaken = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
     coursesnow = models.ManyToManyField("CourseInstance", related_name='coursesnow')
     shoppingcart = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, related_name='shoppingcart')
-    
-    
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name
 
 class Days(models.Model):
-    daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek', blank = True)
+    daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek')
     name = models.CharField(max_length=15)
-    
+
+    OFFERED = (
+            ("m", "Monday"),
+            ("tu", "Tuesday"),
+            ("w", "Wednesday"),
+            ("th", "Thursday"),
+            ("f", "Friday"),
+    )
+
+    daysoffered = models.CharField(
+            max_length=2,
+            choices=OFFERED,
+            blank=True,
+            default="m"
+            help_text="Days offered",
+    )
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name
