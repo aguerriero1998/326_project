@@ -67,6 +67,7 @@ class Student(models.Model):
     idnumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
     email = models.EmailField(max_length=25)
     phonenumber = models.CharField(max_length=12)
+    address = models.CharField(max_length=60)
     gender = models.CharField(max_length=25)
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)

@@ -94,6 +94,7 @@ for i in range(1,LEN):
     a_idnumber = fake.random_int(30000000,40000000)
     a_email = fake.email()
     a_phonenumber = fake.phone_number()
+    an_address = fake.address()
     a_gender = gender[fake.random_int(0,1)]
     a_pronouns = pronouns[fake.random_int(0,1)]
     a_emergency = fake.text(20)
@@ -103,6 +104,7 @@ for i in range(1,LEN):
                         idnumber = a_idnumber,
                         email = a_email,
                         phonenumber = a_phonenumber,
+                        address = an_address,
                         gender = a_gender,
                         pronouns = a_pronouns,
                         emergency = a_emergency,
