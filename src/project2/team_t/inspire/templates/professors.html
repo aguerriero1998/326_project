@@ -7,17 +7,23 @@
 	    </div>
 	    	<dl class="info">
 		      <dt>Name</dt>
-		      <dd>{{ name }}</dd>
-		      <dt>Classes Taught</dt>
+		      <dd>{{ professor.name }}</dd>
+          <dt>Classes Taught</dt>
+          {% if professor.taught %}
 		      <dd>
             <ul>
-              {% for class in taught %} 
+              {% for class in professor.taught %} 
                 <li>{{class}}</li> 
               {% endfor%}
             </ul>
           </dd>
+
+          {% else %}
+          <dd>No courses taught</dd>
+          {% endif %}
 		      <dt>Rating</dt>
-		      <dd>{{ rating }}</dd>
+          <dd>{{ rating }}</dd>
+          <--- TODO TEMPLATIZE THIS!!!! ---> 
           <dt> Reviews</dt>
           <dd>
           <ul>
