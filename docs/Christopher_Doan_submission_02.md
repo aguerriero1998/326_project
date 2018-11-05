@@ -1,0 +1,5 @@
+My main job for the group was to work on the views.py and urls.py. I started with the urls.py by implementing url paths/mappings for each of our html mock ui webpages created for project 1. This required me to assess what each mock ui needed in terms of path specifications. Examples of this is have the "courseinfo/<int:pk>" path for course info and descriptions. This required courses needing primary keys in the form of their course numbers to be identified in the models. This was a design choice made in urls.py.
+
+For views.py, I collaborated with Alex to define the contexts needed to populate the templated mock ui's with information from the models. Along with communicating about context details, we also worked on debuggin problems that would arise from errors in urls.py, views.py, models.py, and some of the templated html files in order to get the webapp working.  
+
+For the write up portion I explained the overview of urls and views and I also helped with the video submission. I edited the submission video for this project. This required cutting together the video and screen capturing the working web-app.
