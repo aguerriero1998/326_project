@@ -4,6 +4,10 @@ from django.views import generic
 
 # Create your views here.
 
+def index(request):
+    context = {}
+    return render(request, "index.html", context = context)
+
 class Schedule(generic.DetailView):
     model = Student
     template_name = "dashboard.html"
