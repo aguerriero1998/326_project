@@ -84,8 +84,8 @@ th, td{
 	text-align: left;
 }
 th {
-        background-color: #861D21;
-	color: white;
+
+	color: black;
 }
 .button {
 	display: inline-block;
