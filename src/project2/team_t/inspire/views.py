@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from inspire.models import Course, CourseInstance, Professor, Student, Days, CourseReview
+from inspire.models import Course, CourseInstance, Professor, Student, Days, CourseReview, ProfessorReview
 from django.views import generic
 
 # Create your views here.
@@ -46,20 +46,22 @@ def search_results(request):
 
 class ShoppingCartView(generic.DetailView):
     model = Student
-    template_name = "shoppingCart.html"
+    template_name = "shopping-cart.html"
 
 
 class StudentDetailView(generic.DetailView):
     model = Student
-    template_name = "studentinfo.html"
+    template_name = "student-info.html"
 
 class ProfessorDetailView(generic.DetailView):
     model = Professor
-    template_name = "professor.html"
+    template_name = "professor-info.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['classes'] = CourseInstance.objects.all().filter(prof=self.object)
+        print(ProfessorReview.objects.all().filter(professor=self.object).count())
+        context['reviews'] = ProfessorReview.objects.all().filter(professor=self.object)
         return context
 
 
@@ -81,7 +83,7 @@ class ProfessorListView(generic.ListView):
 
 class CourseDetailView(generic.DetailView):
     model = Course
-    template_name = "courseinfo.html"
+    template_name = "course-info.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,23 +95,4 @@ class CourseDetailView(generic.DetailView):
 class CourseInstanceDetailView(generic.DetailView):
     model = CourseInstance
     template_name = "course-instance-info.html"
-    
-    """View function for home page of site.
-    # Generate counts of some of the main objects
-    num_books = Book.objects.all().count()
-    num_instances = BookInstance.objects.all().count()
-
-    # Available books (status = 'a')
-    num_instances_available = BookInstance.objects.filter(
-        status__exact="a").count()
-
-    # The 'all()' is implied by default.
-    num_authors = Author.objects.count()
-
-    context = {
-        "num_books": num_books,
-        "num_instances": num_instances,
-        "num_instances_available": num_instances_available,
-        "num_authors": num_authors,
-    }
-    """
+   

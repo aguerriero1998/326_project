@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from faker import Faker
  
 #Import our data model
-from inspire.models import Course, CourseInstance, Professor, Student, Days, Reviews, CourseReview
+from inspire.models import Course, CourseInstance, Professor, Student, Days, ProfessorReview, CourseReview
 
 LEN = 20
 
@@ -111,17 +111,18 @@ for i in range(1,LEN):
     students.append(student)
 
 
-reviews = []
+professor_reviews = []
 for i in range(1,50):
     a_remarks = fake.text(200)
 
-    review = Reviews(remarks = a_remarks)
-    review.save()
-    reviews.append(review)
+    review = ProfessorReview(remarks = a_remarks)
 
-for professor in professors:
-    for i in range(1,fake.random_int(1, 4)):
-        professor.review.add(reviews[fake.random_int(0,len(reviews) - 1 )])
+    review.giver = students[fake.random_int(0,len(students) - 1 )]
+    review.professor = professors[fake.random_int(0,len(professors) - 1 )]
+
+    review.save()
+    professor_reviews.append(review)
+
 
 for course in courses:
     course.reccomendation = courseInstances[fake.random_int(0, len(courseInstances) - 1 )]
@@ -175,10 +176,6 @@ for student in students:
     for i in range(1, fake.random_int(1, 10)):
         student.shoppingcart.add(courseInstances[fake.random_int(0,len(courseInstances) - 1 )])
       
-for review in reviews:
-        review.giver = students[fake.random_int(0,len(students) - 1 )]
-        review.save()
-
 course_reviews = []
 for i in range(1,50):
     a_remarks = fake.text(200)

@@ -6,7 +6,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Course(models.Model):
     """
         Model representing a course at UMass (e.g CS326, CS311).
-        """
+        Inlcudes the description, course number, credits, rating, and other attributes.
+        Not to be confused with a CourseInstance which is the actual class session which has a time, location, ect.
+    """
+
     name = models.CharField(max_length=20, help_text='Enter a class name')
     coursenumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(80000), MinValueValidator(70000)])
     description =  models.TextField(max_length=100)
@@ -18,10 +21,14 @@ class Course(models.Model):
     
     
     def __str__(self):
-        """String for representing the Model object."""
         return self.name
 
 class CourseInstance(models.Model):
+
+    """
+        A session of a Course. It includes a professor, class number, time, location, textbook, enrollment information, ect.
+        base_course points to the Course which this object represents (Similar to BookInstance and Book in Django Library Example). 
+    """
     
     name = models.CharField(max_length=20, help_text='Enter a class name')
     prof = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
@@ -38,12 +45,13 @@ class CourseInstance(models.Model):
     basecourse = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True, related_name='basecourse')
     
     def __str__(self):
-        """String for representing the Model object."""
         return self.name
 
 class Professor(models.Model):
+    """
+        Professor object, with a name and rating
+    """
     name = models.CharField(primary_key=True, max_length=20, help_text='Enter a name')
-    review = models.ManyToManyField('Reviews')
     rating =  models.DecimalField(max_digits=3, decimal_places=2, null=True)
     
     def __str__(self):
@@ -51,6 +59,10 @@ class Professor(models.Model):
         return self.name
 
 class Student(models.Model):
+    """
+        Represents a student with personal information such as student ID, email, ect. 
+        and class information, i.e courses currently enrolled in, ect.
+    """
     name = models.CharField(max_length=25)
     idnumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
     email = models.EmailField(max_length=25)
@@ -63,10 +75,12 @@ class Student(models.Model):
     shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart')
 
     def __str__(self):
-        """String for representing the Model object."""
         return self.name
 
 class Days(models.Model):
+    """
+        A Day Model, represents a day on which a CourseInstance will meet. Only 5 choices here
+    """
     OFFERED = (
             ("Mon", "Monday"),
             ("Tu", "Tuesday"),
@@ -84,23 +98,33 @@ class Days(models.Model):
     )
 
     def __str__(self):
-        """String for representing the Model object."""
         return self.daysoffered
 
-class Reviews(models.Model):
+class ProfessorReview(models.Model):
+
+    """
+        Represents A review given to a professor consisting of the actual comment, the student who gave the review, 
+        and professor which was reviewed
+    """
+    
     remarks = models.TextField(max_length=200)
     giver = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
+    professor = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        """String for representing the Model object."""
         return self.remarks[0:30]
 
 
 class CourseReview(models.Model):
+
+    """
+        Represents A review given to a course consisting of the actual comment, the student who gave the review, 
+        and course which was reviewed
+    """
+
     remarks = models.TextField(max_length=200)
     giver = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        """String for representing the Model object."""
         return self.remarks
