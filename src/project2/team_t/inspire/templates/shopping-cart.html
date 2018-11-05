@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.1/examples/dashboard/ -->
+{% extends "base_generic.html" %}
+               
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-3">
+                    <h1 class="h2">Shopping Cart</h1>   
+    </div>
+<!--Shopping Cart pieces goes here! -->
+
+          <table class="table table-bordered ">
+            <thead class="thead-light ">
+                    <tr class="shoppingCartTable">
+                      <th scope="col">Class Name</th>
+                      <th scope="col">Professor</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Days</th>
+                      <th scope="col">Credits</th>
+                      <th scope="col">Select</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for class in student.shoppingcart.all %}
+                    <tr>
+
+                      <td ><a href={% url 'course_instance_info' pk=class.classnumber %}> {{ class.name }}</a> </td>
+                      <td> <a href={% url 'professor_info' pk=class.prof%}>{{ class.prof }}</a></td>
+                      <td>{{ class.location }}</td>
+                      <td> {{ class.start }} - {{class.end}}</td>
+                      <td>{% for day in class.days.all %} {{ day.daysoffered }} {%endfor%}</td>
+                      <td>{{ class.basecourse.credits }}</td>
+                      <td><input type="checkbox" value=""></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+    
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <div class = "row">
+                <div class = "enroll">
+                    <button type="enroll" class="btn btn-secondary enroll" style="background: #669999">Enroll</button>
+                 </div>
+                <div class = "delete">
+                    <button type="delete" class="btn btn-secondary" style="background: #354F00">Delete</button>
+                </div>
+              </div>
+            </div>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-3">
+            <div class = "row">
+                <h2 class = "enrolledClasses">Enrolled Classes</h1>
+            </div>
+        </div>
+
+        
+            <table class = "table table-bordered enrolledClassesTable">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Class Name</th>
+                                  <th scope="col">Professor</th>
+                                  <th scope="col">Location</th>
+                                  <th scope="col">Time</th>
+                                  <th scope="col">Days</th>
+                                  <th scope="col">Credits</th>
+                                  <th scope="col">Select</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for class in student.coursesnow.all %}
+                                <tr>
+                                  <td scope="row"><a href={% url 'course_instance_info' pk=class.classnumber %}> {{ class.name }}</a> </td>
+                                  <td><a href={% url 'professor_info' pk=class.prof%}>{{ class.prof }}</a></td>
+                                  <td>{{ class.location }}</td>
+                                   <td> {{ class.start }} - {{class.end}}</td>
+                                  <td>{% for day in class.days.all %} {{ day.daysoffered }} {%endfor%}</td>
+                                  <td>{{ class.basecourse.credits }}</td>
+                                  <td><input type="checkbox" value=""></td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <div class = "row">
+                <div class = "delete">
+                    <button type="delete" class="btn btn-secondary" style="background: #354F00">Delete</button>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

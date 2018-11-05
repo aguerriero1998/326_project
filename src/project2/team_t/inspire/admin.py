@@ -1,7 +1,66 @@
 from django.contrib import admin
-from inspire.models import Course, CourseInstance, Professor, Student
+from inspire.models import Course, CourseInstance, Professor, Student, Days
 
-admin.site.register(Course)
-admin.site.register(CourseInstance)
-admin.site.register(Professor)
-admin.site.register(Student)
+
+class CourseInstanceInline1(admin.TabularInline):
+    model = CourseInstance
+    fk_name = "prof"
+
+class CourseInstanceInline2(admin.TabularInline):
+    model = CourseInstance
+    fk_name = "basecourse"
+
+class StudentInline1(admin.TabularInline):
+    model = Student
+    fk_name = "coursestaken"
+
+class CourseInstanceInline3(admin.TabularInline):
+    model = Student.coursesnow.through
+    extra = 1
+
+
+
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'gened', 'major')
+#fields = ['name', 'coursenumber', 'description', 'credits', 'rating', 'comments', 'gened', 'major']
+    inlines = [CourseInstanceInline2]
+
+
+@admin.register(CourseInstance)
+class CourseInstanceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start', 'end','location', 'textbook','students', 'available')
+    inlines = [
+        CourseInstanceInline3
+    ]
+    exclude = ( 'coursesnow', )
+
+
+
+
+    
+@admin.register(Professor)
+class ProfessorAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
+    inlines = [CourseInstanceInline1]
+
+
+
+
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency')
+    fields = ['name','idnumber','email','phonenumber','gender','pronouns', 'emergency']
+    inlines = [CourseInstanceInline3]
+
+admin.site.register(Days)
+
+
+
+
+
+

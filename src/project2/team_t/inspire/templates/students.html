@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Student List</h1>
+
+	    </div>
+	    	
+
+
+            <table class = "table table-bordered ">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">ID</th>
+                                  <th scope="col">Schedule</th>
+                                  <th scope="col">Shopping Cart</th>
+                                  <th scope="col">Student Info</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for student in student_list %}
+                                <tr>
+                                  <td scope="row">{{ student.name }}</td>
+                                  <td>{{ student.idnumber }}</td>
+                                  <td><a href={% url 'dashboard' pk=student.idnumber  %}> Schedule </a></td>
+                                  <td><a href={% url 'shopping_cart' pk=student.idnumber %}> Shopping Cart </a> </td>
+                                  <td><a href={% url 'student_info' pk=student.idnumber %}> Student Info </a></td>
+                       
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+		
+{% endblock %}

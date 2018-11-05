@@ -1,0 +1,64 @@
+{% extends "base_generic.html" %}
+
+{% block css %}
+{% load static %}
+<link href={% static "css/studentinfo.css" %} rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Search Results</h1>
+	         </div>
+
+	         <div id="results">
+	         	{% if results%}
+	         
+	         		{% for course in results%}
+						<div class="card card-default">
+  							<div class="card-header">{{ course.name }} </div>
+  							<div class="card-body">
+   						 		<table class="table">
+   									<tr>
+   										<th>Days and Times</th>
+   										<th>Room</th>
+   										<th>Instructor</th>
+   										<th>Credits</th>
+   										<th>Students Enrolled</th>
+   										<th>Max Capacity</th>
+   										<th>More Information</th>
+   									</tr>
+
+   									{% for instance in course.instances %}
+   									<tr>
+   										<td>{{ instance.time }}</td>
+   										<td>{{ instance.location }} </td>
+   										<td>{{ instance.professor }}</td>
+   										<td>{{ instance.credits }}</td>
+   										<td>{{ instance.enrolled }}</td>
+   										<td>{{ instance.capactiy }}</td>	
+   										<td><button type="button" class="btn btn-default" style="border: 1px; border-style: solid">More info</button></td>
+   									</tr>
+   									{% endfor %}
+   									
+  								</table>
+ 							 </div>
+						</div>
+	         		{% endfor %}
+	       
+	         	{% else %}
+	         		<h3>No classes found matching that criteria</h3>
+	         	{% endif %}
+	         </div>
+	   
+	    	
+		
+
+			
+	
+
+       
+{% endblock %}

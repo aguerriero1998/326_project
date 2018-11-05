@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Course Instance Info</h1>
+
+	         </div>
+	    	<dl class="info">
+		      <dt>Name</dt>
+		      <dd><a href={% url 'course_info' pk=courseinstance.basecourse.coursenumber %}> {{courseinstance.name}}</a></dd>
+		      <dt>Professor</dt>
+          <dd><a href={% url 'professor_info' pk=courseinstance.prof %}>{{ courseinstance.prof }}</a></dd>
+
+          <dt>Semester</dt>
+          <dd>{{ courseinstance.semester }}</dd>
+
+          <dt>Class Number</dt>
+          <dd>{{ courseinstance.classnumber }}</dd>
+
+          <dt>Time</dt>
+          <dd>{{ courseinstance.start }} - {{ courseinstance.end }}</dd>
+
+          <dt>Days </dt>
+          <dd>{% for day in courseinstance.days.all %} {{ day.daysoffered }} {%endfor%}</dd>
+
+          <dt>Location</dt>
+          <dd>{{ courseinstance.location }}</dd>
+
+          <dt>Textbook</dt>
+          <dd>{{ courseinstance.textbook }}</dd>
+
+          <dt>Students Enrolled</dt>
+          <dd>{{ courseinstance.students }}</dd>
+
+          <dt>Available Spaces</dt>
+          <dd>{{ courseinstance.available }}</dd>
+
+
+
+
+		</dl>
+		
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block css %}
+{% load static %}
+<link href={% static "css/studentinfo.css" %} rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Homepage</h1>
+             </div>
+             
+             <body>
+                 <p>Hello and welcome to Inspire!
+                    The developers at Team tEaM have worked hard to overhaul and optimize the infamous Spire web service. 
+                </p>
+                <p>
+                    To the left we have the sidebar which will navigate to lists of professors, students, courses, and course instances. We also have a conveniently placed class-search (not functioning). Within each list, contains links to details about students, professors, and courses.
+                </p>
+                <p>
+                    Feel free to look around :) -team tEaM
+                </p>
+             </body>
+
+{% endblock %}
