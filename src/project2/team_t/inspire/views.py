@@ -72,4 +72,3 @@ class courseDetailView(generic.DetailView):
         "num_authors": num_authors,
     }
     """
-
