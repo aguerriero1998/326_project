@@ -11,21 +11,28 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Personal Information</h1>
              </div>
+             
              {% if student.coursestaken %}
              <header>Classes Taken</header>
-            <table class="table table-bordered">
-                <tr>
+            <table class="table table-bordered ">
+              <thead class="thead-light ">
+                  <tr>
                     <th>Course</th>
                     <th>Semester</th>
-                </tr>
-                {% for class in student.coursestaken%}
+                 </tr>
+               </thead>
+              <tbody>
+                {% for class in student.coursestaken.all%}
                 <tr>
                     <th>{{ class.name }}</th>
                     <th>{{ class.semester }}</th>
                 </tr>
                 {% endfor %}
+              </tbody>
                 {% else %}
                    {% endif %}
+           
+
             <dl>
               <dt>Name</dt>
               <dd>{{ student.name }}</dd>

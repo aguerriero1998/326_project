@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Course Instancse List</h1>
+
+	    </div>
+	    	
+
+
+            <table class = "table table-bordered ">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Name/Description</th>
+                                  <th scope="col">More Info</th>
+                                  <th scope="col">Professor</th>
+                                  <th scope="col">Time</th>
+                                  <th scope="col">Days</th>
+                                  <th scope="col">Semester</th>
+                                  <th scope="col">Location</th>
+                                  <th scope="col">Textbook</th>
+                                  <th scope="col">Students Enrolled</th>
+                                  <th scope="col">Spaces Remaining</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for courseinstance in courseinstance_list %}
+                                <tr>
+                                  <td scope="row"><a href={% url 'course_info' pk=courseinstance.basecourse.coursenumber %}> {{courseinstance.name}}</a></td>
+
+                                  <td> <a href={% url 'course_instance_info' pk=courseinstance.classnumber %}> {{courseinstance.classnumber}}</a> </td>
+                                  <td> <a href={% url 'professor_info' pk=courseinstance.prof %}>{{ courseinstance.prof }}</a></td>
+                                  <td> {{ courseinstance.start }} - {{ courseinstance.end }}</td>
+                                  <td>{% for day in courseinstance.days.all %} {{ day.daysoffered }} {%endfor%}</td>
+                                  <td> {{ courseinstance.semester }} </td>
+                                  <td> {{ courseinstance.location }} </td>
+                                  <td> {{ courseinstance.textbook }} </td>
+                                  <td> {{ courseinstance.students }} </td>
+                                  <td> {{ courseinstance.available }} </td>
+
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+		
+{% endblock %}

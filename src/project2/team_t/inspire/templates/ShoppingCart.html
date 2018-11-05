@@ -9,7 +9,6 @@
     </div>
 <!--Shopping Cart pieces goes here! -->
 
-
           <table class="table table-bordered ">
             <thead class="thead-light ">
                     <tr class="shoppingCartTable">
@@ -17,19 +16,22 @@
                       <th scope="col">Professor</th>
                       <th scope="col">Location</th>
                       <th scope="col">Time</th>
+                      <th scope="col">Days</th>
                       <th scope="col">Credits</th>
                       <th scope="col">Select</th>
                     </tr>
                   </thead>
                   <tbody>
 
-                    {% for class in shopping_cart %}
+                    {% for class in student.shoppingcart.all %}
                     <tr>
-                      <td scope="row">{{ class.name }}</td>
-                      <td>{{ class.professor }}</td>
+
+                      <td ><a href={% url 'course_instance_info' pk=class.classnumber %}> {{ class.name }}</a> </td>
+                      <td> <a href={% url 'professor_info' pk=class.prof%}>{{ class.prof }}</a></td>
                       <td>{{ class.location }}</td>
-                      <td>{{ class.time }}</td>
-                      <td>{{ class.credits }}</td>
+                      <td> {{ class.start }} - {{class.end}}</td>
+                      <td>{% for day in class.days.all %} {{ day.daysoffered }} {%endfor%}</td>
+                      <td>{{ class.basecourse.credits }}</td>
                       <td><input type="checkbox" value=""></td>
                     </tr>
                     {% endfor %}
@@ -63,19 +65,21 @@
                                   <th scope="col">Professor</th>
                                   <th scope="col">Location</th>
                                   <th scope="col">Time</th>
+                                  <th scope="col">Days</th>
                                   <th scope="col">Credits</th>
                                   <th scope="col">Select</th>
                                 </tr>
                               </thead>
                               <tbody>
 
-                                {% for class in enrolled_classes %}
+                                {% for class in student.coursesnow.all %}
                                 <tr>
-                                  <td scope="row">{{ class.name }}</td>
-                                  <td>{{ class.professor }}</td>
+                                  <td scope="row"><a href={% url 'course_instance_info' pk=class.classnumber %}> {{ class.name }}</a> </td>
+                                  <td><a href={% url 'professor_info' pk=class.prof%}>{{ class.prof }}</a></td>
                                   <td>{{ class.location }}</td>
-                                  <td>{{ class.time }}</td>
-                                  <td>{{ class.credits }}</td>
+                                   <td> {{ class.start }} - {{class.end}}</td>
+                                  <td>{% for day in class.days.all %} {{ day.daysoffered }} {%endfor%}</td>
+                                  <td>{{ class.basecourse.credits }}</td>
                                   <td><input type="checkbox" value=""></td>
                                 </tr>
                                 {% endfor %}
