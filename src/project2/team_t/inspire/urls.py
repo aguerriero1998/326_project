@@ -19,7 +19,7 @@ urlpatterns = [
     path("shopping-cart/<int:pk>", views.ShoppingCartView.as_view(), name="shopping_cart"),
     path("student-info/<int:pk>", views.StudentDetailView.as_view(), name="student_info"),
 
-    
+    path("", views.index, name="index"),
     
     
 ]
