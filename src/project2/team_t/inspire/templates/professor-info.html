@@ -26,10 +26,10 @@
 
           <dt> Reviews</dt>
           <dd>
-            {% if professor.review.all %}
+            {% if reviews %}
           <ul>
             
-            {% for review in professor.review.all %}
+            {% for review in reviews%}
             <li>
              {{ review.remarks }}
             </li>
