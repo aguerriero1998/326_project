@@ -27,7 +27,7 @@ class CourseInstance(models.Model):
     prof = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
     classnumber = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
     time = models.TimeField(null=True, blank=True)
-    prerequisites = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
+    prerequisites = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, related_name='prerequisites')
     semester = models.CharField(max_length=6)
     location = models.CharField(max_length=25)
     textbook = models.CharField(max_length=25)
@@ -35,7 +35,7 @@ class CourseInstance(models.Model):
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     days = models.ManyToManyField("Days")
     studentname = models.ManyToManyField("Student")
-    coursestaken = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True)
+    basecourse = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True, related_name='basecourse')
     
     def __str__(self):
         """String for representing the Model object."""
@@ -59,15 +59,16 @@ class Student(models.Model):
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
     coursestaken = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
-    shoppingcart = models.ForeignKey("CourseInstance", on_delete=models.SET_NULL, null=True)
-    coursesnow = models.ManyToManyField("CourseInstance")
+    coursesnow = models.ManyToManyField("CourseInstance", related_name='coursesnow')
+    shoppingcart = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, related_name='shoppingcart')
+
 
     def __str__(self):
         """String for representing the Model object."""
         return self.name
 
-class Days(modes.Model):
-    days = models.ManyToManyField("CourseInstance")
+class Days(models.Model):
+    daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek')
     name = models.CharField(max_length=15)
 
     def __str__(self):
