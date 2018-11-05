@@ -36,8 +36,7 @@ class CourseInstance(models.Model):
     textbook = models.CharField(max_length=25)
     students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
-    days = models.ManyToManyField("Days", blank = True)
-    studentname = models.ManyToManyField("Student")
+    days = models.ManyToManyField("Days")
     basecourse = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True, related_name='basecourse')
     
     def __str__(self):
@@ -45,9 +44,10 @@ class CourseInstance(models.Model):
         return self.name
 
 class Professor(models.Model):
-    name = models.CharField(primary_key=True, max_length=20, help_text='Enter a name')
-    taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, blank = True)
-    review = models.TextField(max_length=100)
+    name = models.CharField(max_length=20, help_text='Enter a name')
+    taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
+    review = models.ManyToManyField('Reviews')
+    rating =  models.DecimalField(max_digits=3, decimal_places=2)
     
     def __str__(self):
         """String for representing the Model object."""
@@ -70,9 +70,26 @@ class Student(models.Model):
         return self.name
 
 class Days(models.Model):
-    daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek', blank = True)
-    name = models.CharField(max_length=15)
-    
+    OFFERED = (
+            ("m", "Monday"),
+            ("tu", "Tuesday"),
+            ("w", "Wednesday"),
+            ("th", "Thursday"),
+            ("f", "Friday"),
+    )
+
+    daysoffered = models.CharField(
+            max_length=2,
+            choices=OFFERED,
+            blank=True,
+            default="m",
+            help_text="Days offered",
+    )
+
     def __str__(self):
         """String for representing the Model object."""
-        return self.name
+        return self.daysoffered
+
+class Reviews(models.Model):
+    remarks = models.TextField(max_length=200)
+    giver = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)

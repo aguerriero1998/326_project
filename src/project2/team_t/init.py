@@ -6,14 +6,15 @@ from django.contrib.auth.models import User
 from faker import Faker
  
 #Import our data model
-from inspire.models import Course, CourseInstance, Professor, Student
+from inspire.models import Course, CourseInstance, Professor, Student, Days, Reviews
+
+LEN = 20
 
 fake = Faker()
 
 #Fake Course Data w/ fake data
-#TODO add in recommendation at the end!!!
 courses = []
-for i in range(1,20):
+for i in range(1,LEN):
     a_className = fake.text(20)
     a_courseNumber = fake.random_int(70000,80000)
     a_description = fake.text(100)
@@ -40,11 +41,12 @@ for i in range(1,20):
 
 #CourseInstances portion of the data model w/ fake data
 courseInstances = []
-for i in range(1,20):
+for i in range(1,LEN):
     a_name = fake.text(20)
     #TODO add in prof at the end
     a_classNumber = fake.random_int(70000,80000)
-    a_time = fake.time(pattern="%H:%M", end_datetime=None)
+    a_start = fake.time(pattern="%H:%M", end_datetime=None)
+    a_end = fake.time(pattern="%H:%M", end_datetime=None)
     #TODO add in prerequisites at the end
     a_semester = fake.text(6)
     a_location = fake.bothify(text="## ??", letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -59,7 +61,8 @@ for i in range(1,20):
     courseInstance = CourseInstance(
                                     name = a_name,
                                     classnumber = a_classNumber,
-                                    time = a_time,
+                                    start = a_start,
+                                    end = a_end,
                                     semester = a_semester,
                                     location = a_location,
                                     textbook = a_textbook,
@@ -71,19 +74,15 @@ for i in range(1,20):
     #courseInstance.studentname.add(a_studentname)
 
     #courseInstance.save()
-    courseInstances.append(CourseInstance)
+    courseInstances.append(courseInstance)
 
 #Professor portion of the data model w/ fake data
 professors = []
-for i in range(1,20):
+for i in range(1,LEN):
     a_name = fake.name()
-    #TODO implement courses taught later
-    #a_taught
-    a_review = fake.text(100)
-
     professor = Professor(
                         name = a_name,
-                        review = a_review
+                        rating = fake.random_int(0,500)/100    
     )
     professor.save()
     professors.append(professor)
@@ -92,7 +91,7 @@ for i in range(1,20):
 students = []
 gender = ["male", "female"]
 pronouns = ["he/him", "she/her"]
-for i in range(1,20):
+for i in range(1,LEN):
     a_name = fake.name()
     a_idnumber = fake.random_int(30000000,40000000)
     a_email = fake.email()
@@ -100,9 +99,6 @@ for i in range(1,20):
     a_gender = gender[fake.random_int(0,1)]
     a_pronouns = pronouns[fake.random_int(0,1)]
     a_emergency = fake.text(20)
-    #a_coursesTaken =
-    #a_shoppingCart = 
-    #a_coursesNow = courseInstances[fake.random_int(0,19)]
 
     student = Student(
                         name = a_name,
@@ -112,10 +108,64 @@ for i in range(1,20):
                         gender = a_gender,
                         pronouns = a_pronouns,
                         emergency = a_emergency,
-                        #coursesnow = a_coursesNow,
     )
     student.save()
     students.append(student)
+
+
+reviews = []
+for i in range(1,LEN):
+    a_remarks = fake.text(200)
+
+    review = Reviews(remarks = a_remarks)
+    review.save()
+    reviews.append(review)
+
+for professor in professors:
+    for i in range(1,fake.random_int(1, 4)):
+        professor.review.add(reviews[fake.random_int(0,len(reviews) - 1 )])
+    for i in range(1, fake.random_int(1, 3)):
+        professor.taught = courseInstances[fake.random_int(0,len(courseInstances) - 1 )]
+        professor.save()
+
+for course in courses:
+    for i in range(1, fake.random_int(1, 3)):
+        course.reccomendation = courseInstances[fake.random_int(0,len(courseInstances) - 1 )]
+        course.save()
+
+for courseInstance in courseInstances:
+    for i in range(1, fake.random_int(1, 3)):
+        day = Days.OFFERED[fake.random_int(0, 4)]
+        day = Days(daysoffered = day[0])
+        day.save() # saved the day 
+        courseInstance.days.add(day)
+
+    courseInstance.course = courses[fake.random_int(0,len(courses) - 1 )]
+    courseInstance.save()
+
+    courseInstance.course = professors[fake.random_int(0,len(professors) - 1 )]
+    courseInstance.save()
+
+    for i in range(fake.random_int(0,2)): 
+        courseInstance.course = courses[fake.random_int(0,len(courses) - 1 )]
+        courseInstance.save()
+
+for student in students:
+    
+    for i in range(1, fake.random_int(1, 10)):
+        student.coursestaken = courses[fake.random_int(0,len(courses) - 1 )]
+        student.save()
+
+    for i in range(1, fake.random_int(1,5)):
+        student.coursesnow.add(courseInstances[fake.random_int(0,len(courseInstances) - 1 )])
+    for i in range(1, fake.random_int(1, 10)):
+        student.shoppingcart = courseInstances[fake.random_int(0,len(courseInstances) - 1 )]
+        student.save()
+
+for review in reviews:
+        review.giver = students[fake.random_int(0,len(students) - 1 )]
+        review.save()
+
 
 username = "admin"
 password = "admin"
