@@ -35,7 +35,6 @@ class CourseInstance(models.Model):
     students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     days = models.ManyToManyField("Days")
-    studentname = models.ManyToManyField("Student")
     basecourse = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True, related_name='basecourse')
     
     def __str__(self):
@@ -70,9 +69,6 @@ class Student(models.Model):
         return self.name
 
 class Days(models.Model):
-    daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek')
-    name = models.CharField(max_length=15)
-
     OFFERED = (
             ("m", "Monday"),
             ("tu", "Tuesday"),
@@ -91,7 +87,7 @@ class Days(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.name
+        return self.daysoffered
 
 class Reviews(models.Model):
     remarks = models.TextField(max_length=200)
