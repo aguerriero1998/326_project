@@ -25,7 +25,7 @@ class Course(models.Model):
 class CourseInstance(models.Model):
     
     name = models.CharField(max_length=20, help_text='Enter a class name')
-    prof = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+    prof = models.ForeignKey('Professor', on_delete=models.SET_NULL, null = True, blank = True)
     classnumber = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
     prerequisites = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, related_name='prerequisites', blank = True)
     start = models.TimeField(null=True, blank=True) 
@@ -36,23 +36,27 @@ class CourseInstance(models.Model):
     students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
     days = models.ManyToManyField("Days", blank = True)
-    studentname = models.ManyToManyField("Student")
+    studentname = models.ManyToManyField("Student", blank = True)
     basecourse = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True, related_name='basecourse')
     
     def __str__(self):
         """String for representing the Model object."""
         return self.name
+    def get_days(self):
+        return ", ".join(days.daysofweek for days in self.days.all()[:7])
+    get_days.short_description = "Days"
 
 class Professor(models.Model):
     name = models.CharField(max_length=20, help_text='Enter a name')
-<<<<<<< HEAD
-    taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, blank = True)
-    review = models.TextField(max_length=100)
-=======
-    taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
-    review = models.ManyToManyField('Reviews')
+
+    taught = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null = True, blank = True)
+    review = models.ManyToManyField('Reviews', null = True, blank = True)
     rating =  models.DecimalField(max_digits=3, decimal_places=2)
->>>>>>> master
+    def get_reviews(self):
+        return ", ".join(review.remarks for review in self.review.all())
+    get_reviews.short_description = "Reviews"
+
+
     
     def __str__(self):
         """String for representing the Model object."""
@@ -66,9 +70,9 @@ class Student(models.Model):
     gender = models.CharField(max_length=25)
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
-    coursestaken = models.ManyToManyField('Course')
-    coursesnow = models.ManyToManyField('CourseInstance', related_name='coursesnow')
-    shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart')
+    coursestaken = models.ManyToManyField('Course',  blank = True)
+    coursesnow = models.ManyToManyField('CourseInstance', related_name='coursesnow',  blank = True)
+    shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart',  blank = True)
     
     def __str__(self):
         """String for representing the Model object."""
@@ -79,16 +83,14 @@ class Student(models.Model):
     get_shoppingcart.short_description = "Shopping Cart"
 
     def get_coursestaken(self):
-        return ", ".join(coursestaken.name for genre in self.coursestaken.all()[:3])
-    get_shoppingcart.short_description = "Courses Taken"
+        return ", ".join(coursestaken.name for coursestaken in self.coursestaken.all()[:3])
+    get_coursestaken.short_description = "Courses Taken"
 
     
 
 
 class Days(models.Model):
     daysofweek = models.ManyToManyField("CourseInstance", related_name='daysofweek')
-    name = models.CharField(max_length=15)
-
     OFFERED = (
             ("m", "Monday"),
             ("tu", "Tuesday"),

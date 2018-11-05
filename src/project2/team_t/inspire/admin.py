@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inspire.models import Course, CourseInstance, Professor, Student, Days
+from inspire.models import Course, CourseInstance, Professor, Student, Days, Reviews
 
 
 class CourseInstanceInline1(admin.TabularInline):
@@ -33,7 +33,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(CourseInstance)
 class CourseInstanceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start','end', 'location', 'textbook','students', 'available')
+    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start','end', 'location', 'textbook','students', 'available','get_days')
     inlines = [
         CourseInstanceInline3
     ]
@@ -43,7 +43,7 @@ class CourseInstanceAdmin(admin.ModelAdmin):
     
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'review' )
+    list_display = ('name', 'rating','get_reviews' )
 
     inlines = [CourseInstanceInline1]
 
@@ -58,9 +58,5 @@ class StudentAdmin(admin.ModelAdmin):
     inlines = [CourseInstanceInline3]
 
 admin.site.register(Days)
-
-
-
-
-
+admin.site.register(Reviews)
 
