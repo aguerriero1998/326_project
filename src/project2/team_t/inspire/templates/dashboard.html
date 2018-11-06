@@ -1,0 +1,122 @@
+{% extends "base_generic.html" %}
+
+{% block css %}
+    {% load static %}
+    <link href={% static "css/schedule.css" %} rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Class Schedule</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <button class="btn btn-sm btn-outline-secondary">Print</button>
+                        </div>
+                    </div>
+                </div>
+                <!--Schedule goes here! -->
+                <div class="ScheduleContainer">
+                    <div class="cd-schedule loading">
+                        <div class="timeline">
+                            <ul>
+                                <li><span>08:00</span></li>
+                                <li><span>08:30</span></li>
+                                <li><span>09:00</span></li>
+                                <li><span>09:30</span></li>
+                                <li><span>10:00</span></li>
+                                <li><span>10:30</span></li>
+                                <li><span>11:00</span></li>
+                                <li><span>11:30</span></li>
+                                <li><span>12:00</span></li>
+                                <li><span>12:30</span></li>
+                                <li><span>13:00</span></li>
+                                <li><span>13:30</span></li>
+                                <li><span>14:00</span></li>
+                                <li><span>14:30</span></li>
+                                <li><span>15:00</span></li>
+                                <li><span>15:30</span></li>
+                                <li><span>16:00</span></li>
+                                <li><span>16:30</span></li>
+                                <li><span>17:00</span></li>
+                                <li><span>17:30</span></li>
+                                <li><span>18:00</span></li>
+                                <li><span>18:30</span></li>
+                            </ul>
+                        </div>
+                        <!-- .timeline -->
+                        <div class="events">
+                            <ul>
+                                
+                                <li class="events-group">
+                                    <div class="top-info"><span>Monday</span></div>
+                                    <ul>
+                                        
+                                        {% for class in monday_classes %} 
+                                        <li class="single-event" data-start={{ class.start }} data-end={{ class.end }} data-event="event-1">
+                                            <a href="#0">
+                                              <em class="event-name">{{ class.name }} </em>
+                                              <em class="event-room">{{ class.room }}</em> 
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                        
+                                    </ul>
+                                </li>
+                                <li class="events-group">
+                                    <div class="top-info"><span>Tuesday</span></div>
+                                    <ul>
+                                        {% for class in tuesday_classes %} 
+                                        <li class="single-event" data-start={{ class.start }} data-end={{ class.end }} data-event="event-1">
+                                            <a href="#0">
+                                              <em class="event-name">{{ class.name }} </em>
+                                              <em class="event-room">{{ class.room }}</em> 
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li class="events-group">
+                                    <div class="top-info"><span>Wednesday</span></div>
+                                    <ul>
+                                        {% for class in wednesday_classes %} 
+                                        <li class="single-event" data-start={{ class.start }} data-end={{ class.end }} data-event="event-1">
+                                            <a href="#0">
+                                              <em class="event-name">{{ class.name }} </em>
+                                              <em class="event-room">{{ class.room }}</em> 
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li class="events-group">
+                                    <div class="top-info"><span>Thursday</span></div>
+                                    <ul>
+                                        {% for class in thursday_classes %} 
+                                        <li class="single-event" data-start={{ class.start }} data-end={{ class.end }} data-event="event-1">
+                                            <a href="#0">
+                                              <em class="event-name">{{ class.name }} </em>
+                                              <em class="event-room">{{ class.room }}</em> 
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li class="events-group">
+                                    <div class="top-info"><span>Friday</span></div>
+                                    <ul>
+                                       {% for class in friday_classes %} 
+                                        <li class="single-event" data-start={{ class.start }} data-end={{ class.end }} data-event="event-1">
+                                            <a href="#0">
+                                              <em class="event-name">{{ class.name }} </em>
+                                              <em class="event-room">{{ class.room }}</em> 
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+{% endblock %}

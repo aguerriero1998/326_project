@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Professor List</h1>
+
+	    </div>
+	    	
+
+
+            <table class = "table table-bordered ">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Rating </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for professor in professor_list %}
+                                <tr>
+                                  <td scope="row"><a href={% url 'professor_info' pk=professor %}> {{ professor }} </a></td>
+                                  <td> {{ professor.rating }} </td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+		
+{% endblock %}

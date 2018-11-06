@@ -26,14 +26,16 @@ class CourseInstanceInline4(admin.TabularInline):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'comments', 'gened', 'major')
+    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'gened', 'major')
 #fields = ['name', 'coursenumber', 'description', 'credits', 'rating', 'comments', 'gened', 'major']
     inlines = [CourseInstanceInline2]
 
 
 @admin.register(CourseInstance)
 class CourseInstanceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start','end', 'location', 'textbook','students', 'available','get_days')
+
+    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start', 'end','location', 'textbook','students', 'available')
+
     inlines = [
         CourseInstanceInline3
     ]
@@ -43,7 +45,9 @@ class CourseInstanceAdmin(admin.ModelAdmin):
     
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'rating','get_reviews' )
+
+    list_display = ('name' )
+
 
     inlines = [CourseInstanceInline1]
 

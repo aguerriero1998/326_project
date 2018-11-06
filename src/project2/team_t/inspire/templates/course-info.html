@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Course Info</h1>
+
+	         </div>
+	    	<dl class="info">
+		      <dt>Name</dt>
+		      <dd>{{ course.name }}</dd>
+
+		      <dt>Rating</dt>
+          <dd>{{ course.rating }}</dd>
+
+          <dt>Description</dt>
+          <dd>{{ course.description }}</dd>
+
+           <dt>Credits</dt>
+          <dd>{{ course.credits }}</dd>
+
+           <dt>Recommended Course</dt>
+          <dd><a href={% url 'course_instance_info' pk=course.reccomendation.classnumber %}> {{ course.reccomendation}} </a></dd>
+
+
+          <dt> Comments</dt>
+          <dd>
+          {% if reviews %}
+          <ul>
+      
+              {% for review in reviews %}
+            <li>
+             {{ review }}
+             <br>
+
+            </li>
+              {% endfor %}
+          </ul>
+          {% else %}
+          This course has no reviews
+          {% endif %}
+          </dd>
+		</dl>
+		
+{% endblock %}
