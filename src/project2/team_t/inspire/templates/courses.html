@@ -15,7 +15,7 @@
                                   <th scope="col">Course Number</th>
                                   <th scope="col">Credits</th>
                                   <th scope="col">Rating</th>
-                                  <th scope="col">Recommened Course</th>
+                                  
                                 </tr>
                               </thead>
                               <tbody>
@@ -26,7 +26,7 @@
                                   <td><a href={% url 'course_info' pk=course.coursenumber %}> {{ course.coursenumber }} </a></td>
                                   <td> {{ course.credits }}</td>
                                   <td> {{ course.rating }}</td>
-                                  <td><a href={% url 'course_instance_info' pk=course.reccomendation.classnumber %}> {{ course.reccomendation}} </a></td>
+                                
                        
                                 </tr>
                                 {% endfor %}

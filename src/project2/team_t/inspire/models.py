@@ -17,7 +17,7 @@ class Course(models.Model):
     rating =  models.DecimalField(max_digits=3, decimal_places=2)
     gened =  models.CharField(max_length=3)
     major =  models.CharField(max_length=25)
-    reccomendation =  models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True, blank = True)
+    recommendations =  models.ManyToManyField('CourseInstance')
     
     
     def __str__(self):
