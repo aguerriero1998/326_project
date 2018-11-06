@@ -22,7 +22,9 @@ class Course(models.Model):
     
     def __str__(self):
         return self.name
-
+    def get_recommendations(self):
+        return ", ".join(recommendations.name for recommendations in self.recommendations.all()[:5])
+    get_recommendations.short_description = "recommendations"
 
 
 class CourseInstance(models.Model):

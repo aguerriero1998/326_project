@@ -16,8 +16,8 @@ class CourseInstanceInline3(admin.TabularInline):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'gened', 'major','reccomendation')
-    #fields = ['name', 'coursenumber', 'description', 'credits', 'rating', 'comments', 'gened', 'major','recommendation']
+    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'gened', 'major','get_recommendations')
+    #fields = ['name', 'coursenumber', 'description', 'credits', 'rating', 'comments', 'gened', 'major','recommendations']
     inlines = [CourseInstanceInline2]   #basecourse inline
 
 
