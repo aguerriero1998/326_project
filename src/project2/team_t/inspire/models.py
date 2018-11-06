@@ -23,6 +23,8 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class CourseInstance(models.Model):
 
     """
@@ -51,7 +53,7 @@ class CourseInstance(models.Model):
     def __str__(self):
         return self.name
     def get_days(self):
-        return ", ".join(days.daysofweek for days in self.days.all()[:7])
+        return ", ".join(days.daysoffered for days in self.days.all()[:5])
     get_days.short_description = "Days"
 
 class Professor(models.Model):
@@ -90,11 +92,11 @@ class Student(models.Model):
         return self.name
     
     def get_shoppingcart(self):
-        return ", ".join(shoppingcart.name for genre in self.shoppingcart.all()[:3])
+        return ", ".join(shoppingcart.name for shoppingcart in self.shoppingcart.all())
     get_shoppingcart.short_description = "Shopping Cart"
 
     def get_coursestaken(self):
-        return ", ".join(coursestaken.name for coursestaken in self.coursestaken.all()[:3])
+        return ", ".join(coursestaken.name for coursestaken in self.coursestaken.all())
     get_coursestaken.short_description = "Courses Taken"
 
 

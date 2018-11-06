@@ -1,43 +1,33 @@
 from django.contrib import admin
-from inspire.models import Course, CourseInstance, Professor, Student, Days, Reviews
+from inspire.models import Course, CourseInstance, Professor, Student, Days, CourseReview, ProfessorReview
 
 
-class CourseInstanceInline1(admin.TabularInline):
-    model = CourseInstance
-    fk_name = "prof"
 
 class CourseInstanceInline2(admin.TabularInline):
     model = CourseInstance
     fk_name = "basecourse"
 
-class StudentInline1(admin.TabularInline):
-    model = Student
-    fk_name = "coursestaken"
-
 class CourseInstanceInline3(admin.TabularInline):
     model = Student.coursesnow.through
     extra = 1
-    
-class CourseInstanceInline4(admin.TabularInline):
-    model = Student.shoppingcart.through
-    extra = 1
+
 
 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'gened', 'major')
-#fields = ['name', 'coursenumber', 'description', 'credits', 'rating', 'comments', 'gened', 'major']
-    inlines = [CourseInstanceInline2]
+    list_display = ('name', 'coursenumber','description', 'credits', 'rating', 'gened', 'major','reccomendation')
+    #fields = ['name', 'coursenumber', 'description', 'credits', 'rating', 'comments', 'gened', 'major','recommendation']
+    inlines = [CourseInstanceInline2]   #basecourse inline
 
 
 @admin.register(CourseInstance)
 class CourseInstanceAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'basecourse','prof','prerequisites' , 'classnumber',  'semester','start', 'end','location', 'textbook','students', 'available')
+    list_display = ('name', 'basecourse','prof','classnumber','prerequisites' ,  'semester','start', 'end','location', 'textbook','students', 'available','get_days')
 
     inlines = [
-        CourseInstanceInline3
+               CourseInstanceInline3
     ]
     exclude = ( 'coursesnow', )
 
@@ -46,21 +36,23 @@ class CourseInstanceAdmin(admin.ModelAdmin):
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
 
-    list_display = ('name' )
-
-
-    inlines = [CourseInstanceInline1]
-
-
-
+    list_display = ('name', 'rating' )
 
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency','get_shoppingcart','get_coursestaken')
+    list_display = ('name','idnumber','email','phonenumber','address', 'gender','pronouns', 'emergency','get_shoppingcart','get_coursestaken')
     #fields = ['name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency','coursestaken','shoppingcart']
-    inlines = [CourseInstanceInline3]
+    inlines = [CourseInstanceInline3]     #for coursesnow
 
 admin.site.register(Days)
-admin.site.register(Reviews)
+
+@admin.register(ProfessorReview)
+class ProfessorReviewAdmin(admin.ModelAdmin):
+    list_display = ('remarks', 'giver', 'professor')
+
+@admin.register(CourseReview)
+class CourseReviewAdmin(admin.ModelAdmin):
+    list_display = ('remarks', 'giver', 'course')
+
 
