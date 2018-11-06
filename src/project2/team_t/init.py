@@ -127,7 +127,8 @@ for i in range(1,50):
 
 
 for course in courses:
-    course.reccomendation = courseInstances[fake.random_int(0, len(courseInstances) - 1 )]
+    for i in range(1, fake.random_int(2, 3)):
+        course.recommendations.add(courseInstances[fake.random_int(0,len(courseInstances) - 1 )])
     course.save()
 
 
