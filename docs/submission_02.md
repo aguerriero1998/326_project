@@ -3,7 +3,7 @@ friendly interface to shop for classes. We have a reccomendation section and rat
 
 Team Members: Connor Reardon, Alex Guerriero, Chris Doan, Patrick Casey, Akshaya Bhattarai
 
-Video Link:
+Video Link: https://youtu.be/Pup2YOSBkYI
 
 Design Overview: For our database model we have courses, course instances, profesors, students, and days of the week.
 The course class has information about the course such as course number, gen. ed. tag, and comments about the course.
