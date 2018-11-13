@@ -41,7 +41,7 @@ class ProfessorAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name','idnumber','email','phonenumber','address', 'gender','pronouns', 'emergency','get_shoppingcart','get_coursestaken')
+    list_display = ('name','idnumber','phonenumber','address', 'gender','pronouns', 'emergency','get_shoppingcart','get_coursestaken')
     #fields = ['name','idnumber','email','phonenumber', 'gender','pronouns', 'emergency','coursestaken','shoppingcart']
     inlines = [CourseInstanceInline3]     #for coursesnow
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -78,16 +79,18 @@ class Student(models.Model):
     """
     name = models.CharField(max_length=25)
     idnumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
-    email = models.EmailField(max_length=25)
     phonenumber = models.CharField(max_length=12)
     address = models.CharField(max_length=60)
     gender = models.CharField(max_length=25)
+    
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
 
     coursestaken = models.ManyToManyField('CourseInstance')
     coursesnow = models.ManyToManyField("CourseInstance", related_name='coursesnow')
     shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart')
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
     def __str__(self):

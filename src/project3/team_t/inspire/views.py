@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from inspire.models import Course, CourseInstance, Professor, Student, Days, CourseReview, ProfessorReview
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -8,7 +9,7 @@ def index(request):
     context = {}
     return render(request, "index.html", context = context)
 
-class Schedule(generic.DetailView):
+class Schedule(generic.DetailView, LoginRequiredMixin):
     model = Student
     template_name = "dashboard.html"
 
@@ -48,12 +49,12 @@ def search_results(request):
 
     return render(request, "search-results.html", context=context)
 
-class ShoppingCartView(generic.DetailView):
+class ShoppingCartView(generic.DetailView, LoginRequiredMixin):
     model = Student
     template_name = "shopping-cart.html"
 
 
-class StudentDetailView(generic.DetailView):
+class StudentDetailView(generic.DetailView, LoginRequiredMixin):
     model = Student
     template_name = "student-info.html"
 

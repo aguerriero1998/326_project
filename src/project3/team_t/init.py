@@ -5,7 +5,7 @@ from datetime import timedelta
 from django.contrib.auth.models import User
 from faker import Faker
  
-#Import our data model
+# Import our data model
 from inspire.models import Course, CourseInstance, Professor, Student, Days, ProfessorReview, CourseReview
 
 LEN = 20
@@ -90,9 +90,16 @@ students = []
 gender = ["male", "female"]
 pronouns = ["he/him", "she/her"]
 for i in range(1,LEN):
-    a_name = fake.name()
+
+    a_first_name = fake.first_name()
+    a_last_name = fake.last_name()
+
+    user = User.objects.create_user(a_first_name[0].lower() + a_last_name.lower(), a_first_name[0].lower() + a_last_name.lower() + "@326.umass.edu", a_last_name)
+    user.first_name = a_first_name
+    user.last_name = a_last_name
+    user.save()
+
     a_idnumber = fake.random_int(30000000,40000000)
-    a_email = fake.email()
     a_phonenumber = fake.phone_number()
     an_address = fake.address()
     a_gender = gender[fake.random_int(0,1)]
@@ -100,14 +107,14 @@ for i in range(1,LEN):
     a_emergency = fake.text(20)
 
     student = Student(
-                        name = a_name,
+                        name = a_first_name + " " + a_last_name,
                         idnumber = a_idnumber,
-                        email = a_email,
                         phonenumber = a_phonenumber,
                         address = an_address,
                         gender = a_gender,
                         pronouns = a_pronouns,
                         emergency = a_emergency,
+                        user = user
     )
     student.save()
     students.append(student)
