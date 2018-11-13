@@ -9,7 +9,7 @@ def index(request):
     context = {}
     return render(request, "index.html", context = context)
 
-class Schedule(generic.DetailView, LoginRequiredMixin):
+class Schedule(LoginRequiredMixin, generic.DetailView):
     model = Student
     template_name = "dashboard.html"
 
@@ -49,12 +49,12 @@ def search_results(request):
 
     return render(request, "search-results.html", context=context)
 
-class ShoppingCartView(generic.DetailView, LoginRequiredMixin):
+class ShoppingCartView(LoginRequiredMixin, generic.DetailView):
     model = Student
     template_name = "shopping-cart.html"
 
 
-class StudentDetailView(generic.DetailView, LoginRequiredMixin):
+class StudentDetailView(LoginRequiredMixin, generic.DetailView):
     model = Student
     template_name = "student-info.html"
 
