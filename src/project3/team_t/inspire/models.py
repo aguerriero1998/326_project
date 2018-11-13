@@ -90,7 +90,7 @@ class Student(models.Model):
     coursesnow = models.ManyToManyField("CourseInstance", related_name='coursesnow')
     shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart')
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):
