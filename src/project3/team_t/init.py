@@ -2,7 +2,7 @@ import textwrap
 from datetime import timedelta
 
 # Create a super user to use the admin site.
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from faker import Faker
  
 # Import our data model
@@ -89,6 +89,10 @@ for i in range(3,6):
 students = []
 gender = ["male", "female"]
 pronouns = ["he/him", "she/her"]
+
+group = Group(name="Student")
+group.save()
+
 for i in range(1,LEN):
 
     a_first_name = fake.first_name()
@@ -97,7 +101,10 @@ for i in range(1,LEN):
     user = User.objects.create_user(a_first_name[0].lower() + a_last_name.lower(), a_first_name[0].lower() + a_last_name.lower() + "@326.umass.edu", a_last_name)
     user.first_name = a_first_name
     user.last_name = a_last_name
+    user.groups.add(group)
     user.save()
+    
+
 
     a_idnumber = fake.random_int(30000000,40000000)
     a_phonenumber = fake.phone_number()
@@ -178,7 +185,7 @@ for student in students:
         student.coursestaken.add(courseInstances[fake.random_int(0,len(courseInstances) - 1 )])
         student.save()
 
-    for i in range(1, fake.random_int(1,5)):
+    for i in range(1, fake.random_int(2,5)):
         courseInstance = courseInstances[fake.random_int(0, len(courseInstances) - 1 )]
         if len(student.coursesnow.all().filter(start=courseInstance.start)) == 0:
             student.coursesnow.add(courseInstance)
