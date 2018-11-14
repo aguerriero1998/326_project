@@ -18,6 +18,9 @@ def index(request):
         return render(request, "professors.html")
 
 class Schedule(LoginRequiredMixin, generic.DetailView):
+
+    login_url = reverse('login')
+    
     model = Student
     template_name = "dashboard.html"
 
@@ -58,11 +61,18 @@ def search_results(request):
     return render(request, "search-results.html", context=context)
 
 class ShoppingCartView(LoginRequiredMixin, generic.DetailView):
+
+    login_url = reverse('login')
+
     model = Student
     template_name = "shopping-cart.html"
 
 
 class StudentDetailView(LoginRequiredMixin, generic.DetailView):
+    
+
+    login_url = reverse('login')
+
     model = Student
     template_name = "student-info.html"
 
@@ -78,7 +88,9 @@ class ProfessorDetailView(generic.DetailView):
         return context
 
 
-class StudentListView(generic.ListView):
+class StudentListView(PermissionRequiredMixin, generic.ListView):
+    permission_required = 'inspire.can_view_student_list'
+
     model = Student
     template_name = "students.html"
 
