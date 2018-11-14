@@ -25,14 +25,27 @@
   </head>
 
 <body>
-    
+   
+  
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap flex-sm-nowrap flex-nowrap p-10 shadow" style="background-color: #861D21;">
         {% block searchbar %}
+
+        {% if user.student %}
+
         <a class=" col-2 col-sm-2 col-md-2 col-lg-2 mr-0" href="{% url 'dashboard' pk=user.student.idnumber %}" style="color: #f2f2f2">SPIRE</a>
+        {% else %}
+
+        <a class=" col-2 col-sm-2 col-md-2 col-lg-2 mr-0" href="{% url 'professor_list' %}" style="color: #f2f2f2">SPIRE</a>
+
+
+
+        {% endif %}
+
+
         <input class="form-control form-control-primary w-100" type="text" placeholder="Search SPIRE" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#" style="color: #f2f2f2">Sign out</a>
+              <a class="nav-link" href="{% url 'logout' %}" style="color: #f2f2f2">Sign out</a>
             </li>
         </ul>
         {% endblock %}
@@ -57,6 +70,7 @@
                         </li>
 
                       <!---- if Professor ---->
+                      {% if perms.inspire.can_view_student_list %}
                          <li class="nav-item">
                             {% url 'student_list' as url%}
                             <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
@@ -64,6 +78,26 @@
                                 Students
                             </a>
                         </li>
+                        {% else %}
+
+                        {% if user.student %}
+
+                            {% url 'student_info' pk=user.student.idnumber as url %}
+      
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/users.svg" %} >
+                                My info
+                            </a>
+
+                            {% url 'shopping_cart' pk=user.student.idnumber as url %}
+      
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/shopping-cart.svg" %} >
+                                Shopping Cart
+                            </a>
+                        {% endif %}
+
+                        {% endif %}
 
                         <li class="nav-item">
                             {% url 'class_search' as url%}
@@ -105,7 +139,10 @@
             </main>
             </div>
         </div>
+
         <!-- Bootstrap core JavaScript
+
+          
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src={% static "js/jquery-3.3.1.slim.min.js" %} integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
