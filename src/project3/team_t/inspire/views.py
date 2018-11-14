@@ -50,15 +50,13 @@ class Schedule(LoginRequiredMixin, generic.DetailView):
 
         return context
 
-
+@login_required
 def class_search(request):
-    context = {}
-    return render(request, "class-search.html", context=context)
+    return render(request, "class-search.html")
 
+@login_required
 def search_results(request):
-    context = {}
-
-    return render(request, "search-results.html", context=context)
+    return render(request, "search-results.html")
 
 class ShoppingCartView(LoginRequiredMixin, generic.DetailView):
 
@@ -70,13 +68,15 @@ class ShoppingCartView(LoginRequiredMixin, generic.DetailView):
 
 class StudentDetailView(LoginRequiredMixin, generic.DetailView):
     
-
     login_url = reverse('login')
 
     model = Student
     template_name = "student-info.html"
 
-class ProfessorDetailView(generic.DetailView):
+class ProfessorDetailView(LoginRequiredMixin, generic.DetailView):
+
+    login_url = reverse('login')
+
     model = Professor
     template_name = "professor-info.html"
 
@@ -94,19 +94,31 @@ class StudentListView(PermissionRequiredMixin, generic.ListView):
     model = Student
     template_name = "students.html"
 
-class CourseListView(generic.ListView):
+class CourseListView(LoginRequiredMixin, generic.ListView):
+
+    login_url = reverse('login')
+
     model = Course
     template_name = "courses.html"
 
-class CourseInstanceListView(generic.ListView):
+class CourseInstanceListView(LoginRequiredMixin, generic.ListView):
+    
+    login_url = reverse('login')
+
     model = CourseInstance
     template_name = "course-instances.html"
 
-class ProfessorListView(generic.ListView):
+class ProfessorListView(LoginRequiredMixin, generic.ListView):
+    
+    login_url = reverse('login')
+    
     model = Professor
     template_name = "professors.html"
 
-class CourseDetailView(generic.DetailView):
+class CourseDetailView(LoginRequiredMixin, generic.DetailView):
+
+    login_url = reverse('login')
+
     model = Course
     template_name = "course-info.html"
 
@@ -117,7 +129,10 @@ class CourseDetailView(generic.DetailView):
 
         return context
 
-class CourseInstanceDetailView(generic.DetailView):
+class CourseInstanceDetailView(LoginRequiredMixin, generic.DetailView):
+
+    login_url = reverse('login')
+
     model = CourseInstance
     template_name = "course-instance-info.html"
    
