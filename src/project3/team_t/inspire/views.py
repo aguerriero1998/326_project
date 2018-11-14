@@ -1,18 +1,21 @@
 from django.shortcuts import render
 from inspire.models import Course, CourseInstance, Professor, Student, Days, CourseReview, ProfessorReview
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def index(request):
-    if request.user.student.idnumber:
-        print(f'/{request.user.student.idnumber}/')
-        return HttpResponseRedirect(reverse('dashboard', args=(request.user.student.idnumber,)))
-    else:
-        print(request.user.student)
-        return render(request, "index.html")
+    try:
+        if request.user.student.idnumber:
+            return HttpResponseRedirect(reverse('dashboard', args=(request.user.student.idnumber,)))
+        else:
+            return render(request, "course-instances.html")
+    except:
+        return render(request, "professors.html")
 
 class Schedule(LoginRequiredMixin, generic.DetailView):
     model = Student
