@@ -93,18 +93,20 @@ pronouns = ["he/him", "she/her"]
 group = Group(name="Student")
 group.save()
 
+print("Listing Student User Login Info:")
+
 for i in range(1,LEN):
 
     a_first_name = fake.first_name()
     a_last_name = fake.last_name()
 
-    user = User.objects.create_user(a_first_name[0].lower() + a_last_name.lower(), a_first_name[0].lower() + a_last_name.lower() + "@326.umass.edu", a_last_name)
+    user = User.objects.create_user(a_first_name[0].lower() + a_last_name.lower(), a_first_name[0].lower() + a_last_name.lower() + "@326.umass.edu", a_last_name.lower())
     user.first_name = a_first_name
     user.last_name = a_last_name
     user.groups.add(group)
     user.save()
     
-
+    print(f"Username: {a_first_name[0].lower() + a_last_name.lower()} Password: {a_last_name.lower()}")
 
     a_idnumber = fake.random_int(30000000,40000000)
     a_phonenumber = fake.phone_number()
