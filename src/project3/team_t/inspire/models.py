@@ -104,6 +104,9 @@ class Student(models.Model):
         return ", ".join(coursestaken.name for coursestaken in self.coursestaken.all())
     get_coursestaken.short_description = "Courses Taken"
 
+    class Meta:
+        permissions = (("can_view_student_list", "Can view the list of student view"),)
+
 
 class Days(models.Model):
     """

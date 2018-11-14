@@ -7,7 +7,7 @@
 
 {% block content %}
 
-          {% if student.user == user%}
+          {% if student.user == user or perms.inspire.can_view_student_list %}
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Personal Information</h1>
              </div>
