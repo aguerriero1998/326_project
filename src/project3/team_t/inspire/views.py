@@ -5,6 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.contrib import messages
+from functools import reduce
 # Create your views here.
 
 @login_required
@@ -27,11 +30,9 @@ class Schedule(LoginRequiredMixin, generic.DetailView):
 
     def get_list(self, day):
         courses_taking = self.object.coursesnow.all().filter(days__daysoffered=day)
-        print(courses_taking)
         listOfdicts = []
         length = range(len(courses_taking))
         for p in courses_taking:
-            print(p.start.__str__()[0:5])
             dict = {"name": p.name,
             "room": p.location,
             "start": p.start.__str__()[0:5],
@@ -83,7 +84,6 @@ class ProfessorDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['classes'] = CourseInstance.objects.all().filter(prof=self.object)
-        print(ProfessorReview.objects.all().filter(professor=self.object).count())
         context['reviews'] = ProfessorReview.objects.all().filter(professor=self.object)
         return context
 
@@ -124,7 +124,6 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(CourseReview.objects.all().filter(course=self.object))
         context['reviews'] = CourseReview.objects.all().filter(course=self.object)
 
         return context
@@ -144,10 +143,60 @@ def unenroll_classes(request):
 
     student = Student.objects.all().filter(idnumber=student_id).get()
 
-    print(student.coursesnow.all())
-    
-
     [student.coursesnow.remove(CourseInstance.objects.all().filter(classnumber=course).get()) for course in courses]
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
+
+def enroll_classes(request):
+
+    def enroll(course, student):
+        # Queries for all courses that meet on the same day as the course that is being enrolled. It uses the Q function to query the database
+        potential_conflicts = student.coursesnow.all().filter(reduce(lambda x, y: x | y, [Q(days__daysoffered__contains=day['daysoffered']) for day in course.days.all().values()]))
+        print(potential_conflicts)
+        for pcourse in potential_conflicts:
+            if(pcourse.start <= course.start <= pcourse.end or pcourse.start <= course.end <= pcourse.end):
+                print("conflict")
+                return course
+            else:
+                print("no conflict")
+                
+        student.coursesnow.add(course)
+        student.shoppingcart.remove(course)    
+        return None    
+
+
+
+    def remove(course, student):
+        student.shoppingcart.remove(course)
+
+
+    courses = request.POST.getlist('courseId')
+    student_id = request.POST.get('studentid', '')
+    print(student_id)
+
+    student = Student.objects.all().filter(idnumber=student_id).get()
+
+    if "enroll" in request.POST:
+        result = [enroll(CourseInstance.objects.all().filter(classnumber=course).get(), student) for course in courses]
+        if result:
+            for course in result:
+                messages.info(request, f"Could not enroll in course  '{course} : {course.classnumber}' due to a conflict")
+        
     
+    if "delete" in request.POST:
+        [remove(CourseInstance.objects.all().filter(classnumber=course).get(), student) for course in courses] 
+
+    return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
+
+def add_to_shopping_cart(request):
+    
+    courses = request.POST.getlist('courseId')
+    student_id = request.POST.get('studentid', 'Doesnt exist')
+
+    student = Student.objects.all().filter(idnumber=student_id).get()
+   
+    # student.shoppingcart.add()
+    [student.shoppingcart.add(CourseInstance.objects.all().filter(classnumber=course).get()) for course in courses if (not student.shoppingcart.all().filter(classnumber=course).exists() and not student.coursesnow.all().filter(classnumber=course).exists())]
+
+    return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
+

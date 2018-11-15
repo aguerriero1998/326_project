@@ -6,7 +6,14 @@
 
 	    </div>
 	    	
-
+           
+            <form method="post" action={% url 'add_to_shopping_cart' %}>
+              {% csrf_token %}
+              {% if user.student %}
+              <input type="hidden" id="studentid" name="studentid" value={{ user.student.idnumber }}>
+              {% endif %}
+         
+            {{user.student.idnumber}}
 
             <table class = "table table-bordered ">
                 <thead class="thead-light">
@@ -21,6 +28,9 @@
                                   <th scope="col">Textbook</th>
                                   <th scope="col">Students Enrolled</th>
                                   <th scope="col">Spaces Remaining</th>
+                                  {% if user.student%}
+                                  <th scope="col">Add to Shopping Cart</th>
+                                  {% endif %}
                                 </tr>
                               </thead>
                               <tbody>
@@ -38,10 +48,25 @@
                                   <td> {{ courseinstance.textbook }} </td>
                                   <td> {{ courseinstance.students }} </td>
                                   <td> {{ courseinstance.available }} </td>
-
+                                  {% if user.student %}
+                                  <td><input type="checkbox" name="courseId" value="{{ courseinstance.classnumber }}"></td>
+                                  {% endif %}
                                 </tr>
                                 {% endfor %}
                               </tbody>
                             </table>
+                        
+                    {% if user.student %}
+                     
+                     <div class="btn-group" role="group" aria-label="Basic example">
+                    <div class = "row">
+                    <div class = "delete">
+                      <input type="submit" value="Add to Shopping Cart" class="btn btn-secondary" style="background: #669999">
+                     </div>
+                    </div>
+                    </div>
+   
+                    {% endif %}
+                    </form>
 		
 {% endblock %}
