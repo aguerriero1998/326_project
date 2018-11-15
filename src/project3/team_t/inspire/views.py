@@ -136,3 +136,18 @@ class CourseInstanceDetailView(LoginRequiredMixin, generic.DetailView):
     model = CourseInstance
     template_name = "course-instance-info.html"
    
+def unenroll_classes(request):
+
+
+    courses = request.POST.getlist('courseId')
+    student_id = request.POST.get('studentid', '')
+
+    student = Student.objects.all().filter(idnumber=student_id).get()
+
+    print(student.coursesnow.all())
+    
+
+    [student.coursesnow.remove(CourseInstance.objects.all().filter(classnumber=course).get()) for course in courses]
+
+    return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
+    

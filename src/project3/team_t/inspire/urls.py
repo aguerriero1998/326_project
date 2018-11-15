@@ -18,6 +18,7 @@ urlpatterns = [
     path("<int:pk>", views.Schedule.as_view(), name="dashboard"),
     path("shopping-cart/<int:pk>", views.ShoppingCartView.as_view(), name="shopping_cart"),
     path("student-info/<int:pk>", views.StudentDetailView.as_view(), name="student_info"),
+    path("unenroll-classes/", views.unenroll_classes, name="unenroll"),
 
     path("", views.index, name="index"),
     

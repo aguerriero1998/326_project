@@ -57,7 +57,9 @@
             </div>
         </div>
 
-        
+        <form method="post" action={% url 'unenroll' %}>
+           {% csrf_token %}
+           <input type="hidden" id="studentid" name="studentid" value={{student.idnumber}}>
             <table class = "table table-bordered enrolledClassesTable">
                 <thead class="thead-light">
                                 <tr>
@@ -80,20 +82,21 @@
                                    <td> {{ class.start }} - {{class.end}}</td>
                                   <td>{% for day in class.days.all %} {{ day.daysoffered }} {%endfor%}</td>
                                   <td>{{ class.basecourse.credits }}</td>
-                                  <td><input type="checkbox" value=""></td>
+                                  <td><input type="checkbox" name="courseId" value="{{class.classnumber}}"></td>
                                 </tr>
                                 {% endfor %}
                               </tbody>
                             </table>
 
 
-        <div class="btn-group" role="group" aria-label="Basic example">
+          <div class="btn-group" role="group" aria-label="Basic example">
             <div class = "row">
                 <div class = "delete">
-                    <button type="delete" class="btn btn-secondary" style="background: #354F00">Delete</button>
+                    <input type="submit" value="Delete" class="btn btn-secondary" style="background: #354F00">
                 </div>
               </div>
             </div>
+          </form>
 
             {% else %}
             <br>
