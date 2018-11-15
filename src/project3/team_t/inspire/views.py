@@ -150,15 +150,14 @@ def unenroll_classes(request):
 def enroll_classes(request):
 
     def enroll(course, student):
+
         # Queries for all courses that meet on the same day as the course that is being enrolled. It uses the Q function to query the database
         potential_conflicts = student.coursesnow.all().filter(reduce(lambda x, y: x | y, [Q(days__daysoffered__contains=day['daysoffered']) for day in course.days.all().values()]))
-        print(potential_conflicts)
+
         for pcourse in potential_conflicts:
             if(pcourse.start <= course.start <= pcourse.end or pcourse.start <= course.end <= pcourse.end):
-                print("conflict")
                 return course
-            else:
-                print("no conflict")
+            
                 
         student.coursesnow.add(course)
         student.shoppingcart.remove(course)    
@@ -172,7 +171,6 @@ def enroll_classes(request):
 
     courses = request.POST.getlist('courseId')
     student_id = request.POST.get('studentid', '')
-    print(student_id)
 
     student = Student.objects.all().filter(idnumber=student_id).get()
 

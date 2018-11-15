@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.1/examples/dashboard/ -->
 {% extends "base_generic.html" %}
-               
+            
+{%block title%}Shopping Cart{%endblock%}
+
 {% block content %}
 
 {% if user == student.user or perms.inspire.can_view_student_list %}
