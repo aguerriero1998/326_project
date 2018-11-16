@@ -176,6 +176,7 @@ def enroll_classes(request):
 
     if "enroll" in request.POST:
         result = [enroll(CourseInstance.objects.all().filter(classnumber=course).get(), student) for course in courses]
+        result = filter(lambda x: x is not None, result)
         if result:
             for course in result:
                 messages.info(request, f"Could not enroll in course  '{course} : {course.classnumber}' due to a conflict")
