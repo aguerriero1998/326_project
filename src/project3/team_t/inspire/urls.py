@@ -20,6 +20,8 @@ urlpatterns = [
     path("shopping-cart/<int:pk>", views.ShoppingCartView.as_view(), name="shopping_cart"),
     path("student-info/<int:pk>", views.StudentDetailView.as_view(), name="student_info"),
     path("unenroll-classes/", views.unenroll_classes, name="unenroll"),
+    path("enroll-classes/", views.enroll_classes, name="enroll"),
+    path("add-to-shopping-cart/", views.add_to_shopping_cart, name="add_to_shopping_cart"),
 
     path("", views.index, name="index"),
     

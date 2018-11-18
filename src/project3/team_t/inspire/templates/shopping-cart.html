@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.1/examples/dashboard/ -->
 {% extends "base_generic.html" %}
-               
+            
+{%block title%}Shopping Cart{%endblock%}
+
 {% block content %}
+
 {% if user == student.user or perms.inspire.can_view_student_list %}
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-3">
-                    <h1 class="h2">Shopping Cart</h1>   
-    </div>
+    <h1 class="h2">Shopping Cart</h1>   
+  </div>  
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
 <!--Shopping Cart pieces goes here! -->
 
           <table class="table table-bordered ">
@@ -23,6 +39,11 @@
                   </thead>
                   <tbody>
 
+
+              <form method="post" action={% url 'enroll' %}>
+              {% csrf_token %}
+              <input type="hidden" id="studentid" name="studentid" value={{student.idnumber}}>
+
                     {% for class in student.shoppingcart.all %}
                     <tr>
 
@@ -32,7 +53,7 @@
                       <td> {{ class.start }} - {{class.end}}</td>
                       <td>{% for day in class.days.all %} {{ day.daysoffered }} {%endfor%}</td>
                       <td>{{ class.basecourse.credits }}</td>
-                      <td><input type="checkbox" value=""></td>
+                      <td><input type="checkbox" name="courseId" value="{{class.classnumber}}"></td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -43,13 +64,15 @@
         <div class="btn-group" role="group" aria-label="Basic example">
             <div class = "row">
                 <div class = "enroll">
-                    <button type="enroll" class="btn btn-secondary enroll" style="background: #669999">Enroll</button>
+                    <input type="submit" name="enroll" value="Enroll" class="btn btn-secondary" style="background: #669999">
                  </div>
                 <div class = "delete">
-                    <button type="delete" class="btn btn-secondary" style="background: #354F00">Delete</button>
+                  <input type="submit" name="delete" value="Delete" class="btn btn-secondary" style="background: #354F00">    
                 </div>
               </div>
             </div>
+
+          </form>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-0 mb-3">
             <div class = "row">
