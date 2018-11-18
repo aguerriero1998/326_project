@@ -101,6 +101,11 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
     model = Course
     template_name = "courses.html"
 
+class AddAReview(generic.CreateView):
+    model = CourseReview
+    fields = ['remarks']
+    template_name = "add-review.html"
+
 class CourseInstanceListView(LoginRequiredMixin, generic.ListView):
     
     login_url = reverse('login')

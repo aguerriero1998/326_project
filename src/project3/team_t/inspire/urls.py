@@ -10,6 +10,7 @@ urlpatterns = [
 
     path("course/<int:pk>", views.CourseDetailView.as_view(), name="course_info"),
     path("course-instance/<int:pk>", views.CourseInstanceDetailView.as_view(), name="course_instance_info"),
+    path("course-review/<int:pk>", views.AddAReview.as_view(), name="add_a_review"),
 
 
     path("professor/<str:pk>", views.ProfessorDetailView.as_view(), name="professor_info"),
