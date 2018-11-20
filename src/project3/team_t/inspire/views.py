@@ -10,6 +10,8 @@ from django.contrib import messages
 from functools import reduce
 from .forms import reviewForm
 from .forms import profReviewForm
+from .forms import addCourseForm
+from django.forms import ModelForm
 # Create your views here.
 
 @login_required
@@ -144,6 +146,21 @@ def AddProfessorReview(request,pk):
 
 def AddProfessorReviewSuccess(request,pk):
     return render(request, "review_success.html")
+
+def add_course(request):
+    if request.method == "POST":
+        form = addCourseForm(request.POST)
+        if form.is_valid():
+            c = Course(name=form.cleaned_data['name'], coursenumber=form.cleaned_data['coursenumber'], description=form.cleaned_data['description'], credits=form.cleaned_data['credits'], gened=form.cleaned_data['gened'], major=form.cleaned_data['major'], rating = 0 )
+            c.save()
+            return HttpResponseRedirect('add-course')
+    else:
+        form = addCourseForm()
+    context ={
+        'form' : form,
+    }
+    return render(request, "add-course.html", context)
+    
 
 class CourseInstanceListView(LoginRequiredMixin, generic.ListView):
     
