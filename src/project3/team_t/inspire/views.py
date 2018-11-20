@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
 from functools import reduce
+from .forms import reviewForm
+from .forms import profReviewForm
 # Create your views here.
 
 @login_required
@@ -101,10 +103,47 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
     model = Course
     template_name = "courses.html"
 
-class AddAReview(generic.CreateView):
-    model = CourseReview
-    fields = ['remarks']
-    template_name = "add-review.html"
+def AddCourseReview(request,pk):
+
+    course_to_review = Course.objects.get(coursenumber= pk)
+    if request.method == 'POST':
+        form = reviewForm(request.POST)
+        if form.is_valid():
+            stud = Student.objects.all().get(idnumber = form.cleaned_data['giver'])
+            r = CourseReview(remarks=form.cleaned_data['review'], giver=stud,course = course_to_review)
+            r.save()
+            return HttpResponseRedirect('success')
+    else:
+        form = reviewForm()
+    context ={
+        'course_to_review' : course_to_review,
+        'form' : form,
+    }
+    return render(request, "add-course-review.html",context)
+
+def Review_Success(request):
+    return render(request, "review_success.html")
+
+
+def AddProfessorReview(request,pk):
+    prof_to_review = Professor.objects.get(name= pk)
+    if request.method == 'POST':
+        form = reviewForm(request.POST)
+        if form.is_valid():
+            stud = Student.objects.all().get(idnumber = form.cleaned_data['giver'])
+            r = ProfessorReview(remarks=form.cleaned_data['review'], giver=stud, professor=prof_to_review)
+            r.save()
+            return HttpResponseRedirect("success")
+    else:
+        form = profReviewForm()
+    context ={
+        'prof_to_review' : prof_to_review,
+        'form' : form,
+    }
+    return render(request, "add-professor-review.html",context)
+
+def AddProfessorReviewSuccess(request,pk):
+    return render(request, "review_success.html")
 
 class CourseInstanceListView(LoginRequiredMixin, generic.ListView):
     

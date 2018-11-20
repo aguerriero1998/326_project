@@ -20,7 +20,8 @@
               <thead class="thead-light ">
                   <tr>
                     <th>Course</th>
-                    <th>Reviews</th>
+                    <th>Reviews (add your own)</th>
+                    <th>Professor (click to add review)</th>
                     <th>Semester</th>
                  </tr>
                </thead>
@@ -28,7 +29,8 @@
                 {% for class in student.coursestaken.all%}
                 <tr>
                     <th>{{ class.name }}</th>
-                    <th><a href={% url 'add_a_review' pk=class.basecourse.coursenumber %}> Add </a> </th>
+                    <th><a href={% url 'add_a_review' pk=class.basecourse.coursenumber %}> {{class.basecourse.rating}}/5</a> </th>
+                    <th><a href={% url 'add_professor_review' pk=class.prof %}>{{class.prof}}</a></th>
                     <th>{{ class.semester }}</th>
                 </tr>
                 {% endfor %}

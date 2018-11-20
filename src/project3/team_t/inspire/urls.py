@@ -10,11 +10,14 @@ urlpatterns = [
 
     path("course/<int:pk>", views.CourseDetailView.as_view(), name="course_info"),
     path("course-instance/<int:pk>", views.CourseInstanceDetailView.as_view(), name="course_instance_info"),
-    path("course-review/<int:pk>", views.AddAReview.as_view(), name="add_a_review"),
+    path("course-review/<int:pk>", views.AddCourseReview, name="add_a_review"),
+    path("course-review/success", views.Review_Success, name="review_success"),
 
 
     path("professor/<str:pk>", views.ProfessorDetailView.as_view(), name="professor_info"),
     path("professors/", views.ProfessorListView.as_view(), name="professor_list"),
+    path("professor/<str:pk>/review", views.AddProfessorReview, name="add_professor_review"),
+    path("professor/<str:pk>/success", views.AddProfessorReviewSuccess, name="professor_review_success"),
 
     path("<int:pk>", views.Schedule.as_view(), name="dashboard"),
     path("shopping-cart/<int:pk>", views.ShoppingCartView.as_view(), name="shopping_cart"),
