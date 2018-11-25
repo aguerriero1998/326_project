@@ -15,7 +15,7 @@
              </div>
              
              {% if student.coursestaken %}
-             <header>Classes Taken</header>
+             <header>Classes Taken </header>
             <table class="table table-bordered ">
               <thead class="thead-light ">
                   <tr>
@@ -40,7 +40,7 @@
            
 
             <dl>
-              <dt>Name</dt>
+              <dt>Name <a href={% url 'edit_info' pk=student.idnumber %}> (edit info)</a> </dt>
               <dd>{{ student.name }}</dd>
               <dt>ID Number</dt>
               <dd>{{ student.idnumber }}</dd>
