@@ -11,6 +11,7 @@ from functools import reduce
 from .forms import reviewForm
 from .forms import profReviewForm
 from .forms import addCourseForm
+from .forms import infoForm
 from django.forms import ModelForm
 # Create your views here.
 
@@ -125,6 +126,29 @@ def AddCourseReview(request,pk):
 
 def Review_Success(request):
     return render(request, "review_success.html")
+
+def editInfo(request,pk):
+    s = Student.objects.all().get(idnumber = pk)
+    name = s.name
+    if request.method == "POST":
+        form = infoForm(request.POST)
+        if form.is_valid():
+            s.address = form.cleaned_data['address']
+            s.phonenumber = form.cleaned_data['phonenumber']
+            s.emergency = form.cleaned_data['emergency']
+            s.gender = form.cleaned_data['gender']
+            s.pronouns = form.cleaned_data['pronouns']
+            s.save()
+            url = '{}{}'.format('/inspire/student-info/',pk)
+            return HttpResponseRedirect(url)
+    else:
+        form = infoForm(initial = {'address': s.address, 'phonenumber': s.phonenumber, 'emergency': s.emergency, 'gender': s.gender, 'pronouns': s.pronouns})
+    context = {
+        'form' : form,
+        's': s,
+        'name': name
+    }
+    return render(request, "edit-info.html", context)
 
 
 def AddProfessorReview(request,pk):
