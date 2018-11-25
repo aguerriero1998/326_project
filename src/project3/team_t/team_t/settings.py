@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inspire.apps.InspireConfig'
+    'inspire.apps.InspireConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

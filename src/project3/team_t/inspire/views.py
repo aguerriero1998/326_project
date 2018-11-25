@@ -8,6 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
 from functools import reduce
+from .forms import reviewForm
+from .forms import profReviewForm
+from .forms import addCourseForm
+from .forms import infoForm
+from django.forms import ModelForm
 # Create your views here.
 
 @login_required
@@ -100,6 +105,86 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
 
     model = Course
     template_name = "courses.html"
+
+def AddCourseReview(request,pk):
+
+    course_to_review = Course.objects.get(coursenumber= pk)
+    if request.method == 'POST':
+        form = reviewForm(request.POST)
+        if form.is_valid():
+            stud = Student.objects.all().get(idnumber = form.cleaned_data['giver'])
+            r = CourseReview(remarks=form.cleaned_data['review'], giver=stud,course = course_to_review)
+            r.save()
+            return HttpResponseRedirect('success')
+    else:
+        form = reviewForm()
+    context ={
+        'course_to_review' : course_to_review,
+        'form' : form,
+    }
+    return render(request, "add-course-review.html",context)
+
+def Review_Success(request):
+    return render(request, "review_success.html")
+
+def editInfo(request,pk):
+    s = Student.objects.all().get(idnumber = pk)
+    name = s.name
+    if request.method == "POST":
+        form = infoForm(request.POST)
+        if form.is_valid():
+            s.address = form.cleaned_data['address']
+            s.phonenumber = form.cleaned_data['phonenumber']
+            s.emergency = form.cleaned_data['emergency']
+            s.gender = form.cleaned_data['gender']
+            s.pronouns = form.cleaned_data['pronouns']
+            s.save()
+            url = '{}{}'.format('/inspire/student-info/',pk)
+            return HttpResponseRedirect(url)
+    else:
+        form = infoForm(initial = {'address': s.address, 'phonenumber': s.phonenumber, 'emergency': s.emergency, 'gender': s.gender, 'pronouns': s.pronouns})
+    context = {
+        'form' : form,
+        's': s,
+        'name': name
+    }
+    return render(request, "edit-info.html", context)
+
+
+def AddProfessorReview(request,pk):
+    prof_to_review = Professor.objects.get(name= pk)
+    if request.method == 'POST':
+        form = reviewForm(request.POST)
+        if form.is_valid():
+            stud = Student.objects.all().get(idnumber = form.cleaned_data['giver'])
+            r = ProfessorReview(remarks=form.cleaned_data['review'], giver=stud, professor=prof_to_review)
+            r.save()
+            return HttpResponseRedirect("success")
+    else:
+        form = profReviewForm()
+    context ={
+        'prof_to_review' : prof_to_review,
+        'form' : form,
+    }
+    return render(request, "add-professor-review.html",context)
+
+def AddProfessorReviewSuccess(request,pk):
+    return render(request, "review_success.html")
+
+def add_course(request):
+    if request.method == "POST":
+        form = addCourseForm(request.POST)
+        if form.is_valid():
+            c = Course(name=form.cleaned_data['name'], coursenumber=form.cleaned_data['coursenumber'], description=form.cleaned_data['description'], credits=form.cleaned_data['credits'], gened=form.cleaned_data['gened'], major=form.cleaned_data['major'], rating = 0 )
+            c.save()
+            return HttpResponseRedirect('add-course')
+    else:
+        form = addCourseForm()
+    context ={
+        'form' : form,
+    }
+    return render(request, "add-course.html", context)
+    
 
 class CourseInstanceListView(LoginRequiredMixin, generic.ListView):
     
