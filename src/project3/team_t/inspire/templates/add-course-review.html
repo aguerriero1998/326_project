@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {%block content%}
-
+{% if user.student %}
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Add A Review</h1>
             </div>
@@ -11,6 +11,9 @@
 	    	<dl class="info">
           <form method="post" novalidate>
             {% csrf_token %}
+
+            <input type="hidden" id="studentid" name="studentid" value={{user.student.idnumber}}>
+
           
             {% for hidden_field in form.hidden_fields %}
               {{ hidden_field }}
@@ -52,7 +55,10 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
 		</dl>
-		
+	{% else %}
+  <br>
+<h1 class="h2">You cannot add a review</h1>
+  {% endif %}	
 {% endblock %}
 
 

@@ -23,7 +23,7 @@ def index(request):
         else:
             return render(request, "course-instances.html")
     except:
-        return render(request, "professors.html")
+        return HttpResponseRedirect(reverse("professor_list"))
 
 class Schedule(LoginRequiredMixin, generic.DetailView):
 
@@ -111,8 +111,9 @@ def AddCourseReview(request,pk):
     course_to_review = Course.objects.get(coursenumber= pk)
     if request.method == 'POST':
         form = reviewForm(request.POST)
+        request.POST.get('studentid', 'dne')
         if form.is_valid():
-            stud = Student.objects.all().get(idnumber = form.cleaned_data['giver'])
+            stud = Student.objects.all().get(idnumber = request.POST.get("studentid"))
             r = CourseReview(remarks=form.cleaned_data['review'], giver=stud,course = course_to_review)
             r.save()
             return HttpResponseRedirect('success')
@@ -156,7 +157,7 @@ def AddProfessorReview(request,pk):
     if request.method == 'POST':
         form = reviewForm(request.POST)
         if form.is_valid():
-            stud = Student.objects.all().get(idnumber = form.cleaned_data['giver'])
+            stud = Student.objects.all().filter(idnumber = request.POST.get("studentid")).get()
             r = ProfessorReview(remarks=form.cleaned_data['review'], giver=stud, professor=prof_to_review)
             r.save()
             return HttpResponseRedirect("success")

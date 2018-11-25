@@ -29,8 +29,8 @@
                 {% for class in student.coursestaken.all%}
                 <tr>
                     <th>{{ class.name }}</th>
-                    <th><a href={% url 'add_a_review' pk=class.basecourse.coursenumber %}> {{class.basecourse.rating}}/5</a> </th>
-                    <th><a href={% url 'add_professor_review' pk=class.prof %}>{{class.prof}}</a></th>
+                    <th>{% if user.student == student %}<a href={% url 'add_a_review' pk=class.basecourse.coursenumber %}> {%endif %}  {{class.basecourse.rating}}/5  {% if user.student == student %}</a> {% endif %}</th>
+                    <th><a href={% if user.student == student %}{% url 'add_professor_review' pk=class.prof %}{%else%}{% url 'professor_info' pk=class.prof%}{% endif %}>{{class.prof}}</a></th>
                     <th>{{ class.semester }}</th>
                 </tr>
                 {% endfor %}
@@ -38,9 +38,9 @@
                 {% else %}
                    {% endif %}
            
-
+                   <a href={% url 'edit_info' pk=student.idnumber %}> (edit info)</a>
             <dl>
-              <dt>Name <a href={% url 'edit_info' pk=student.idnumber %}> (edit info)</a> </dt>
+              <dt>Name  </dt>
               <dd>{{ student.name }}</dd>
               <dt>ID Number</dt>
               <dd>{{ student.idnumber }}</dd>
