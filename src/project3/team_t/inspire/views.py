@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
 from django.contrib import messages
 from functools import reduce
@@ -172,13 +172,14 @@ def AddProfessorReview(request,pk):
 def AddProfessorReviewSuccess(request,pk):
     return render(request, "review_success.html")
 
+@permission_required('inspire.can_view_student_list')
 def add_course(request):
     if request.method == "POST":
         form = addCourseForm(request.POST)
         if form.is_valid():
             c = Course(name=form.cleaned_data['name'], coursenumber=form.cleaned_data['coursenumber'], description=form.cleaned_data['description'], credits=form.cleaned_data['credits'], gened=form.cleaned_data['gened'], major=form.cleaned_data['major'], rating = 0 )
             c.save()
-            return HttpResponseRedirect('add-course')
+            return HttpResponseRedirect('/inspire/courses')
     else:
         form = addCourseForm()
     context ={
