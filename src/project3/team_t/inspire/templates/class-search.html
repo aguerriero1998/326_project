@@ -5,6 +5,7 @@
 {% block content%}
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    
               <h1 class="h2">Class Search</h1>
            </div>
 
@@ -14,7 +15,7 @@
               <div class = "col-md-7">
                 <div class = "card">
                     <div class ="card-header">
-<!-- ----------------------------TABULAR AREA FOR SEARCH---------------------------------------- -->      
+<!-- ----------------------------TABULAR AREA FOR SEARCH----------------------------------------
   <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
@@ -35,7 +36,8 @@
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active" id="general" role="tabpanel" aria-labelledby="general-tab">
-    <!-- ------------------------------------------CRITERIA---------------------------------------- --> 
+    <!-- ------------------------------------------CRITERIA---------------------------------------- -->
+    <!--
       <div class = "row top-buffer">
           <div class = "col-md-3"> <p> Search criteria: </p></div>
           <div class = "col-md-4"> 
@@ -52,20 +54,26 @@
             </div>
       </div>
 <!-- ----------------------------EXACT------------------------------------------------------- -->
-                <div class = "row top-buffer">
+<form method="POST" name="searchform" action={% url 'search_results'%}>
+    {% csrf_token %}
+ 
+   <!--             <div class = "row top-buffer">
           <div class = "col-md-3"><p> Class Number</p></div>
           <div class = "col-md-4">
               <div class="form-group">
-                    <input type="text" class="form-control" id="class-num">
+                    <input type="text" class="form-control" name = 'class-number' id="class-num">
               </div>
           </div>
           </div>
-<!-- ----------------------------SUBJECT------------------------------------------------------- --> 
+ -->
+<!-- ----------------------------SUBJECT------------------------------------------------------- -->
+<!--
+
       <div class = "row top-buffer">
           <div class = "col-md-3"><p> Course Subject</p></div>
           <div class = "col-md-8">
             <div class="form-group">
-                    <select class="form-control" id="subject">
+                    <!---select class="form-control" name="subject"id="subject">
                         <option>...</option>
                         <option>Accounting</option>
                         <option>Aerospace Studies</option>
@@ -82,17 +90,19 @@
                         <option>Asian Studies </option>
                         <option>Astronomy </option>
                         <option>Bachelor's Deg W/ Indiv Conc.</option>
-                        <option>Biochemistry & Molec. Bio</option>
+                        <option>Biochemistry  Molec. Bio</option>
                         <option>Biology</option>
                        <option> Biology @ MIC</option>
                        <option> Biomedical Engineering</option>
-                    </select>
+                    </select--->
             </div>
           </div>
           </div>
+          
 <!-- ----------------------------COURSE #------------------------------------------------------- -->
+<!--
                 <div class = "row top-buffer">
-          <div class = "col-md-3"><p> Course Number</p></div>
+                <div class = "col-md-3"><p> Course Number </p></div>
           <div class = "col-md-4">
             <div class="form-group">
                     <select class="form-control" id="course-spec">
@@ -105,20 +115,26 @@
             </div>  
               <div class = "col-md-4">
                     <div class="form-group">
-                            <input type="tex t" class="form-control" id="course-num">
+                            <input type="text" class="form-control" name="num" id="course-num">
                     </div>
               </div>
           </div>
+ 
 <!-- -----------------------------KEYWORD------------------------------------------- -->
-                <div class = "row top-buffer">
+
+    
+    <div class = "row top-buffer">
           <div class = "col-md-3"><p> Course Keyword</p></div>
           <div class = "col-md-6">
             <div class="form-group">
-                            <input type="text" class="form-control" id="course-keyword">
+                <input type="text" class="form-control" id="course-keyword" name="keyword">
+                    <input type="submit" value="submit" name = "button">
+                    
                     </div>
           </div>
           </div>          
 <!-- -----------------------ADVANCED SEARCH------------------------------------------------------>
+<!--
     <div class ="row- top-buffer">
         <div class = "col-md-12">
 
@@ -131,11 +147,13 @@
     </div>
     <div id="collapse1" class="panel-collapse collapse">
       <div class="panel-body">
+ 
 <!-- ------------------------------------------------------------------------------------------->
+<!--
         <div class = "row top-buffer">
           <div class = "col-md-3"><p> Career Type:</p></div>
           <div class = "col-md-8">
-            <select id="sel-cat" class="form-control">
+            <select id="sel-cat" name="sel_cat" class="form-control">
                 <option >Choose...</option>
                 <option>Graduate </option>
                 <option>Non-Credit </option>
@@ -143,38 +161,44 @@
                 <option>Undergraduate</option>
           </select>
           </div>
-          </div> 
+          </div>
+ 
 <!-- ------------------------------------------------------------------------------------------->
+<!--
         <div class = "row top-buffer">
           <div class = "col-md-3"><p> Instructor Name:</p></div>
             <div class = "col-md-4">
-            <select id="sel-inst" class="form-control">
+            <select id="sel-inst" name="instructor_sel" class="form-control">
                 <option selected>begins with</option>
                 <option>contains</option>
                 <option>is exactly</option>
           </select>
           </div>
-          <div class = "col-md-4"> <div class="form-group"> <input type="text" class="form-control" id="course-keyword"> </div> </div>
-          </div> 
+          <div class = "col-md-4"> <div class="form-group"> <input type="text" class="form-control" name = "instructor-name" id="course-keyword"> </div> </div>
+          </div>
+ 
 <!-- ------------------------------------------------------------------------------------------->
+<!--
         <div class = "row top-buffer">
           <div class = "col-md-3"><p> Credit Amount:</p></div>
           <div class = "col-md-8">
-            <select id="sel-cred" class="form-control">
+            <!--select id="sel-cred" name="credit_amount"class="form-control">
                 <option >Choose...</option>
                 <option>1 credit</option>
                 <option>1.5 credits</option>
                 <option>2 credits </option>
                 <option>3 credits</option>
                 <option>4 credits</option>
-          </select>
+          </select--> <!--
           </div>
-          </div> 
+          </div> -->
+ 
 <!-- ------------------------------------------------------------------------------------------->
+<!--
         <div class = "row top-buffer">
           <div class = "col-md-3"><p style="font-size: 13px;"> Mode of Instruction:</p></div>
           <div class = "col-md-8">
-            <select id="sel-mode-instruction" class="form-control">
+            <select id="sel-mode-instruction" name="mode_of_instruction" class="form-control">
                 <option>Choose...</option>
                 <option>Blended</option>
                 <option>In Person</option>
@@ -183,21 +207,25 @@
                 <option>Online Plus in Person</option>
           </select>
           </div>
-          </div> 
+          </div>
+ 
 <!-- ------------------------------------------------------------------------------------------->
+<!--
         <div class = "row top-buffer">
           <div class = "col-md-3"><p> RAP/TAP/HLC:</p></div>
           <div class = "col-md-8">
-            <select id="sel-RAP" class="form-control">
+            <select id="sel-RAP" name = "sel_rap" class="form-control">
                 <option selected>Choose...</option>
           </select>
           </div>
-          </div> 
+          </div>
+ 
 <!-- ------------------------------------------------------------------------------------------->
+<!--
         <div class = "row top-buffer">
           <div class = "col-md-3"><p> CPE Program:</p></div>
           <div class = "col-md-8">
-            <select id="sel-CPE" class="form-control">
+            <select id="sel-CPE" name = "sel_cpe" class="form-control">
                 <option>Choose...</option>
                 <option>Accounting MS</option>
                 <option>Accounting Transitions Program</option>
@@ -211,7 +239,8 @@
                 <option>College Teaching Certificate</option>
           </select>
           </div>
-          </div> 
+          </div>
+ 
 <!-- ------------------------------------------------------------------------------------------->
           
         </div>
@@ -219,43 +248,58 @@
   </div>
 </div>
             </div>
-      </div>  
+      </div>
+
 <!-- --------------------------------SEARCH BUTTON----------------------------------------- -->
+
                 <div class = "row top-buffer">
                     <div class = "col-md-3 bottom-marg">
-                    <button type="button" class="btn btn-success">Search</button>
+                        <input type="submit" value="submit" name = "button">
+                            
+
+    <!--<button type="button" class="btn btn-success" name = "searchButton"> Search</button>  -->
                         </div>
-      </div>    
+      </div>
+
+</form>
 <!-- ------------------------------------------------------------------------------------------->
     </div>
     
-    
+
 <!--------------------------- MAJOR SEARCH CRITERIA---------------------------------------------->
+<!--
   <div class="tab-pane" id="major" role="tabpanel" aria-labelledby="major-tab">
     <div class = "row top-buffer">
           <div class = "col-md-3"> <p> Search criteria: </p></div>
       </div>
-      
- <!-- -------------------------------------------------------------------------------------------- -->      
+
+ <!-- -------------------------------------------------------------------------------------------- -->
+<!--
+ <form method="POST" name="majorsearchform">
+     {% csrf_token %}
           <div class = "form-row top-buffer">
           <div class = "col-md-3"> <p> Select Your Major: </p></div>
               <div class="form-group col-md-6">
-      <select id="sel-major" class="form-control">
+      <select id="sel-major" name="sel_major" class="form-control">
         <option selected>Choose...</option>
         <option>Computer Science (B.S)</option>
         <option>Math (B.S) </option>
       </select>
     </div>
     </div>
+ 
  <!-- -------------------------------------------------------------------------------------------- -->
+<!--
       <div class="row" style="padding: 18px;">
           <div class ="col-md-11">
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+<!--
+          <button type="button" name = "majorsearchbutton" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                 Course Checklist
           </button>
 
           <!-- Modal -->
+<!--
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -280,7 +324,7 @@
       <div class = "form-row top-buffer">
           <div class="col-md-3">Select Category:</div> 
           <div class ="col-md-6">
-          <select id="sel-cat" class="form-control">
+          <select id="sel-cat" name = "majorsel_cat"class="form-control">
             <option selected>Choose...</option>
             <option>Introductory Courses</option>
             <option>Core Course </option>
@@ -294,29 +338,41 @@
       <div class = "form-row top-buffer">
           <div class="col-md-3">Course Keyword:</div> 
           <div class ="col-md-6">
-              <input type="text" class="form-control" id="class-num">
+              <input type="text" name = "majorkeyword" class="form-control" id="class-num">
           </div>
       </div>
+
 <!-- --------------------------------SEARCH BUTTON----------------------------------------- -->
+<!--
                 <div class = "row top-buffer">
-                    <div class = "col-md-3 bottom-marg" style="padding-bottom: 28px;"> <button type="button" class="btn btn-success">Search</button> </div>
+                    <div class = "col-md-3 bottom-marg" style="padding-bottom: 28px;">
+                        <input type="submit" value="submit" name = "majorbutton">
+                            <!--<button type="button" class="btn btn-success">Search</button> </div> -->
       </div>
+                    </div>
+                </form>
  <!-- -------------------------------------------------------------------------------------------- -->
           </div>
     
 <!-- GEN-ED SEARCH CRITERIA-->
+<!--
+<
   <div class="tab-pane" id="gened" role="tabpanel" aria-labelledby="gened-tab">
     <div class = "row top-buffer">
           <div class = "col-md-3"> <p> Search criteria: </p></div>
       </div>
       <div class = "row">
+ 
             <!-- Button trigger modal -->
+            
+<!--
 <div class = "col-md-11" style="padding: 16px;">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Gen-Ed Requirement Tracker
 </button>
 
 <!-- Modal -->
+<!--
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -337,13 +393,16 @@
 </div>
       </div>
           </div>
+      <form method="POST" name="genedsearchform">
+      {% csrf_token %}
       <div class = "row top-buffer">
+          
         <div class = "col-md-3">
           Gen-Ed Subject:
           </div>
           <div class = "col-md-6">
                    <div class="form-group">
-                    <select class="form-control" id="course-spec">
+                    <select class="form-control"name="gened_sel" id="course-spec">
                         <option>...</option>
                         <option>AL: Literature</option>
                         <option>ALDG: Literature/Diversity: Gloabl</option>
@@ -368,17 +427,23 @@
           Gen-Ed Keyword:
           </div>
           <div class="col-md-6">
-              <input type="text" class="form-control" id="class-num">
+              <input type="text" class="form-control" name = "gened_keyword"id="class-num">
           </div>
       </div>
       
       <!-- --------------------------------SEARCH BUTTON----------------------------------------- -->
+<!--
+<!
                 <div class = "row top-buffer">
-                    <div class = "col-md-3 bottom-marg" style="padding-bottom: 87px;"> <button type="button" class="btn btn-success">Search</button> </div>
+                    <div class = "col-md-3 bottom-marg" style="padding-bottom: 87px;">
+                        <input type="submit" value="submit" name = "genedbutton">
+                        <!--<button type="button" class="btn btn-success">Search</button> </div> -->
       </div>
+                    </form>
  <!-- -------------------------------------------------------------------------------------------- -->
     </div>
 <!-- RECOMMENDATION SEARCH CRITERA -->
+<!--
   <div class="tab-pane" id="recommendation" role="tabpanel" aria-labelledby="recommendation-tab">
     <div class = "row top-buffer">
           <div class = "col-md-2"> <p> Search criteria: </p></div>
@@ -392,24 +457,30 @@
                         <a class="dropdown-item" href="#">Other stuff</a>
                         <a class="dropdown-item" href="#">More stuff</a>
                     </div>
-              </div>-->
+              </div> -->
+<!--
             </div>
       </div>
     </div>
 </div>
       </div>
-    </div>      <!-- for the col-->
+    </div>   -->   <!-- for the col-->
+<!--
+
                 <div class = "col-md-5">
                     <div class="card">
                         <div class="card-header" style="padding:20px;">
                             Times
                         </div>
                         <div class = "row" style="margin-top: 52px;">
+                            
+                            
                             <div class = "col-auto" style="padding-left: 22px;"> Meeting Time: </div>
                             <div class = "col-auto" style="padding-left: 66px;">Between </div>
                         </div>
                         <div class = "form-row top-buffer align-center" style="padding-bottom: 62px;">
                             <div class = "col-1"></div>
+                            
                             <div class = "col-auto"><input type="text" class="form-control-auto" id="time-start"></div>
                             <div class = "col-auto" style="text-align: center;"> and </div>
                             <div class = "col-auto"><input type="text" class="form-control-auto" id="time-start"></div>
@@ -466,7 +537,14 @@
                             </div>
                             </div>
                         </div>
-                    </div>
+ 
+ 
+ 
+
+
+ 
+ 
+   </div>
                 </div>
           </div>
           </div>
