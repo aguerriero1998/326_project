@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
 from django.contrib import messages
 from functools import reduce
@@ -106,6 +106,7 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
     model = Course
     template_name = "courses.html"
 
+@login_required
 def AddCourseReview(request,pk):
 
     course_to_review = Course.objects.get(coursenumber= pk)
@@ -128,6 +129,7 @@ def AddCourseReview(request,pk):
 def Review_Success(request):
     return render(request, "review_success.html")
 
+@login_required
 def editInfo(request,pk):
     s = Student.objects.all().get(idnumber = pk)
     name = s.name
@@ -151,7 +153,7 @@ def editInfo(request,pk):
     }
     return render(request, "edit-info.html", context)
 
-
+@login_required
 def AddProfessorReview(request,pk):
     prof_to_review = Professor.objects.get(name= pk)
     if request.method == 'POST':
@@ -172,13 +174,14 @@ def AddProfessorReview(request,pk):
 def AddProfessorReviewSuccess(request,pk):
     return render(request, "review_success.html")
 
+@permission_required('inspire.can_view_student_list')
 def add_course(request):
     if request.method == "POST":
         form = addCourseForm(request.POST)
         if form.is_valid():
             c = Course(name=form.cleaned_data['name'], coursenumber=form.cleaned_data['coursenumber'], description=form.cleaned_data['description'], credits=form.cleaned_data['credits'], gened=form.cleaned_data['gened'], major=form.cleaned_data['major'], rating = 0 )
             c.save()
-            return HttpResponseRedirect('add-course')
+            return HttpResponseRedirect('/inspire/courses')
     else:
         form = addCourseForm()
     context ={
@@ -221,6 +224,7 @@ class CourseInstanceDetailView(LoginRequiredMixin, generic.DetailView):
     model = CourseInstance
     template_name = "course-instance-info.html"
    
+@login_required
 def unenroll_classes(request):
 
 
@@ -233,6 +237,7 @@ def unenroll_classes(request):
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
 
+@login_required
 def enroll_classes(request):
 
     def enroll(course, student):
