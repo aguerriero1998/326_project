@@ -278,6 +278,7 @@ def enroll_classes(request):
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
 
+@login_required
 def add_to_shopping_cart(request):
     
     courses = request.POST.getlist('courseId')
