@@ -18,14 +18,16 @@
 
 	         <div id="results">
 	         	{% if results%}
-	         
+
 	         		{% for course in results%}
+                    
 						<div class="card card-default">
   							<div class="card-header">{{ course.name }} </div>
   							<div class="card-body">
    						 		<table class="table">
    									<tr>
-   										<th>Days and Times</th>
+   										<th>Time</th>
+                                        <th>Days</th>
    										<th>Room</th>
    										<th>Instructor</th>
    										<th>Credits</th>
@@ -36,12 +38,13 @@
 
    									{% for instance in course.instances %}
    									<tr>
-   										<td>{{ instance.time }}</td>
+                                        <td> {{ instance.start }} - {{ instance.end }}</td>
+                                        <td>{% for day in instance.days.all %} {{ day.daysoffered }} {%endfor%}</td>
    										<td>{{ instance.location }} </td>
-   										<td>{{ instance.professor }}</td>
-   										<td>{{ instance.credits }}</td>
-   										<td>{{ instance.enrolled }}</td>
-   										<td>{{ instance.capactiy }}</td>	
+   										<td>{{ instance.prof }}</td>
+   										<td>{{ instance.basecourse.credits }}</td>
+   										<td>{{ instance.students }}</td>
+   										<td>{{ instance.available }}</td>
    										<td><button type="button" class="btn btn-default" style="border: 1px; border-style: solid">More info</button></td>
    									</tr>
    									{% endfor %}
