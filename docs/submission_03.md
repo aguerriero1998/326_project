@@ -3,7 +3,7 @@ friendly interface to shop for classes. We have a reccomendation section and rat
 
 Team Members: Connor Reardon, Alex Guerriero, Chris Doan, Patrick Casey, Akshaya Bhattarai
 
-Video Link: -blank-
+Video Link: https://youtu.be/qLiF2cqTZdA
 
 Design Overview: -no login info yet/authentication yet-
 In this submission we added a few forms to update and create information about for the database. We have created a three forms that are found on the student info page. We have a edit info form. This gives the students the ability to change their own info from the database including things like address, phone number, pronouns, and emergency contact. The form has the character limit for its respective fields and will not update otherwise. The other two forms are concerning professors and courses. The student info displays information about a student's taken courses and the professor that taught the course. The student is able to leave a review about the course and the professor. This creates a review that is attached the course and professor in the database.
