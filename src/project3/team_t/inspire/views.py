@@ -106,6 +106,7 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
     model = Course
     template_name = "courses.html"
 
+@login_required
 def AddCourseReview(request,pk):
 
     course_to_review = Course.objects.get(coursenumber= pk)
@@ -128,6 +129,7 @@ def AddCourseReview(request,pk):
 def Review_Success(request):
     return render(request, "review_success.html")
 
+@login_required
 def editInfo(request,pk):
     s = Student.objects.all().get(idnumber = pk)
     name = s.name
@@ -151,7 +153,7 @@ def editInfo(request,pk):
     }
     return render(request, "edit-info.html", context)
 
-
+@login_required
 def AddProfessorReview(request,pk):
     prof_to_review = Professor.objects.get(name= pk)
     if request.method == 'POST':
@@ -222,6 +224,7 @@ class CourseInstanceDetailView(LoginRequiredMixin, generic.DetailView):
     model = CourseInstance
     template_name = "course-instance-info.html"
    
+@login_required
 def unenroll_classes(request):
 
 
@@ -234,6 +237,7 @@ def unenroll_classes(request):
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
 
+@login_required
 def enroll_classes(request):
 
     def enroll(course, student):
