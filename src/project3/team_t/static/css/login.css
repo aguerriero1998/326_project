@@ -41,7 +41,10 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
+.password-reset-form {
+  margin: auto;
+  width: 12%;
+}
 #submit-btn {
   width: 100px;
 }
@@ -49,3 +52,4 @@ body {
 #login-again{
   font-size: 20px;
 }
+
