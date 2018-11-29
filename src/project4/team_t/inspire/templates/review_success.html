@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{%block title%}Student Info{%endblock%}
+
+{% block css %}
+{% load static %}
+<link href={% static "css/studentinfo.css" %} rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Add A Review</h1>
+  </div>
+<div class ="info"><h1 class="h4 align-items-center"> Review Submission Successful</h1></div>
+
+{% endblock %}

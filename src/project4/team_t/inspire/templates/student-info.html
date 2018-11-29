@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+
+{%block title%}Student Info{%endblock%}
+
+{% block css %}
+{% load static %}
+<link href={% static "css/studentinfo.css" %} rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+          {% if student.user == user or perms.inspire.can_view_student_list %}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Personal Information</h1>
+             </div>
+             
+             {% if student.coursestaken %}
+             <header>Classes Taken </header>
+            <table class="table table-bordered ">
+              <thead class="thead-light ">
+                  <tr>
+                    <th>Course</th>
+                    <th>Reviews (add your own)</th>
+                    <th>Professor (click to add review)</th>
+                    <th>Semester</th>
+                 </tr>
+               </thead>
+              <tbody>
+                {% for class in student.coursestaken.all%}
+                <tr>
+                    <th>{{ class.name }}</th>
+                    <th>{% if user.student == student %}<a href={% url 'add_a_review' pk=class.basecourse.coursenumber %}> {%endif %}  {{class.basecourse.rating}}/5  {% if user.student == student %}</a> {% endif %}</th>
+                    <th><a href={% if user.student == student %}{% url 'add_professor_review' pk=class.prof %}{%else%}{% url 'professor_info' pk=class.prof%}{% endif %}>{{class.prof}}</a></th>
+                    <th>{{ class.semester }}</th>
+                </tr>
+                {% endfor %}
+              </tbody>
+                {% else %}
+                   {% endif %}
+           
+                   <a href={% url 'edit_info' pk=student.idnumber %}> (edit info)</a>
+            <dl>
+              <dt>Name  </dt>
+              <dd>{{ student.name }}</dd>
+              <dt>ID Number</dt>
+              <dd>{{ student.idnumber }}</dd>
+              <dt>Address</dt>
+              <dd>{{ student.address }}</dd>
+              <dt>Phone Number</dt>
+              <dd>{{ student.phonenumber }}</dd>
+              <dt>Email Address</dt>
+              <dd>{{ student.email }}</dd>
+              <dt>Emergency Contact</dt>
+              <dd>{{ student.emergency }}</dd>
+              <dt>Gender and Sexual Identity</dt>
+              <dd>{{ student.gender }}</dd>
+              <dt>Pronouns</dt>
+              <dd>{{ student.pronouns }}</dd>
+            </dl>
+          {% else %}
+            <br>
+            <h1>You are not allowed to view this page :( <h1>
+
+          {% endif %}
+
+{% endblock %}
+

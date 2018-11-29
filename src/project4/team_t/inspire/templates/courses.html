@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{%block title%}Courses{%endblock%}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Course List</h1>
+
+	    </div>
+	    	
+
+
+            <table class = "table table-bordered ">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Course Number</th>
+                                  <th scope="col">Credits</th>
+                                  <th scope="col">Rating</th>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for course in course_list %}
+                                <tr>
+                                  <td scope="row">{{ course.name }}</td>
+                                  <td><a href={% url 'course_info' pk=course.coursenumber %}> {{ course.coursenumber }} </a></td>
+                                  <td> {{ course.credits }}</td>
+                                  <td> {{ course.rating }}</td>
+                                
+                       
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                            <a href="add_course" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add A Course</a>
+		
+{% endblock %}

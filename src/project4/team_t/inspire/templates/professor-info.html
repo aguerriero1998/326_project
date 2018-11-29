@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+
+{%block title%}Professor Info{%endblock%}
+
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Professor</h1>
+	           </div>
+	    	<dl class="info">
+		      <dt>Name</dt>
+		      <dd>{{ professor.name }}</dd>
+          <dt>Classes Taught</dt>
+          {% if classes %}
+		      <dd>
+
+            <ul>
+              {% for class in classes %} 
+                <li><a href={% url 'course_instance_info' pk=class.classnumber %}>{{class}}</a> : {{class.classnumber}}</li> 
+              {% endfor%}
+            </ul>
+          </dd>
+
+          {% else %}
+          <dd>No courses taught</dd>
+          {% endif %}
+		      <dt>Rating</dt>
+          <dd>{{ professor.rating }}</dd>
+
+          <dt> Reviews</dt>
+          <dd>
+            {% if reviews %}
+          <ul>
+            
+            {% for review in reviews%}
+            <li>
+             {{ review.remarks }}
+            </li>
+           {% endfor %}
+           
+          </ul>
+           {% else %}
+            This professor hasn't had any reviews yet
+           {% endif %}
+          </dd>
+		</dl>
+		
+{% endblock %}
