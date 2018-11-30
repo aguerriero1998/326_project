@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.1/examples/dashboard/ -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   
+    <title> {% block title %}{% endblock %} </title>
+    <!-- Bootstrap core CSS -->
+    {% load static %} 
+
+    <link rel="icon" href={% static  "img/umass_logo.ico" %}>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    
+    {% block css %}
+    <!-- Custom styles for this template -->
+    {% endblock %}
+
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+
+    <link href={% static "css/dashboard.css" %} rel="stylesheet">
+
+  </head>
+
+<body>
+   
+  
+    <nav class="navbar navbar-dark fixed-top flex-md-nowrap flex-sm-nowrap flex-nowrap p-10 shadow" style="background-color: #861D21;">
+        {% block searchbar %}
+
+        {% if user.student %}
+
+        <a class=" col-2 col-sm-2 col-md-2 col-lg-2 mr-0" href="{% url 'dashboard' pk=user.student.idnumber %}" style="color: #f2f2f2">SPIRE</a>
+        {% else %}
+
+        <a class=" col-2 col-sm-2 col-md-2 col-lg-2 mr-0" href="{% url 'professor_list' %}" style="color: #f2f2f2">SPIRE</a>
+
+
+
+        {% endif %}
+
+
+        <input class="form-control form-control-primary w-100" type="text" placeholder="Search SPIRE" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+              <a class="nav-link" href="{% url 'logout' %}" style="color: #f2f2f2">Sign out</a>
+            </li>
+        </ul>
+        {% endblock %}
+    </nav>
+    
+    <div class="container-fluid">
+        {% block sidebar %}
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column ">
+                            
+
+                      <!---- if Professor ---->
+                        <li class="nav-item">
+                            {% url 'professor_list' as url%}
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                                <img src={% static "feather/home.svg" %} >
+                                Professors
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                      <!---- if Professor ---->
+                      {% if perms.inspire.can_view_student_list %}
+                         <li class="nav-item">
+                            {% url 'student_list' as url%}
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/users.svg" %} >
+                                Students
+                            </a>
+                        </li>
+                        {% else %}
+
+                        {% if user.student %}
+
+                            {% url 'student_info' pk=user.student.idnumber as url %}
+      
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/users.svg" %} >
+                                My info
+                            </a>
+
+                            {% url 'shopping_cart' pk=user.student.idnumber as url %}
+      
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/shopping-cart.svg" %} >
+                                Shopping Cart
+                            </a>
+                        {% endif %}
+
+                        {% endif %}
+
+                        <li class="nav-item">
+                            {% url 'class_search' as url%}
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                                <img src={% static "feather/book.svg" %} >
+                              
+                                Class Search
+                            </a>
+                        </li>
+
+                         <li class="nav-item">
+                            {% url 'course_list' as url%}
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/book-open.svg" %} >
+                                Courses
+                            </a>
+                        </li>
+
+                         <li class="nav-item">
+                            {% url 'course_instance_list' as url%}
+                            <a class="nav-link {% if request.path == url %} active {% endif %}" href={{url}}>
+                               <img src={% static "feather/coffee.svg" %} >
+                                Course Instances
+                            </a>
+                        </li>
+                       
+                    </ul>
+                    
+                      <!---- STUDENT INFO ---->
+                      <!---- SHOPPING CART ---->
+
+
+                </div>
+                {% endblock %}
+            </nav>
+
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+                {% block content %}{% endblock %}
+            </main>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+
+          
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src={% static "js/jquery-3.3.1.slim.min.js" %} integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+        <script src={% static "js/popper.min.js" %}></script>
+        <script src={% static "js/bootstrap.min.js" %}></script>
+        <script src={% static "js/feather.min.js" %}></script>
+        <script src={% static "js/modernizer.js" %}></script>
+        <script>feather.replace()</script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    
+        <script src={% static "js/schedule.js" %}></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{% extends "login_template.html" %}
+
+{%block title%}
+	Logged Out
+{%endblock%}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href={% static "css/login.css"%}>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+	<div class="row d-flex justify-content-center">
+  		<h1 class="h2">Logged out!</h1>  
+  	</div>
+  	<div class="row d-flex justify-content-center">
+  		<a id="login-again" href="{% url 'login'%}">Click here to login again.</a>
+  	</div>
+</div>
+{% endblock %}
