@@ -86,6 +86,8 @@ class Student(models.Model):
     pronouns = models.CharField(max_length=25)
     emergency = models.CharField(max_length=25)
 
+    relationships = models.ManyToManyField('self', through = 'Relationship', symmetrical = False, related_name='related_to+')
+
     coursestaken = models.ManyToManyField('CourseInstance')
     coursesnow = models.ManyToManyField("CourseInstance", related_name='coursesnow')
     shoppingcart = models.ManyToManyField('CourseInstance', related_name='shoppingcart')
@@ -104,9 +106,35 @@ class Student(models.Model):
         return ", ".join(coursestaken.name for coursestaken in self.coursestaken.all())
     get_coursestaken.short_description = "Courses Taken"
 
+    def add_relationship(self, person, status):
+        relationship, created = Relationship.objects.get_or_create(from_student=self, to_student=student)
+        if symm:
+            student.add_relationship(self, status, False)
+        return relationship
+    
+    def remove_relationship(self, person, status):
+        Relationship.objects.filter(from_student=self, to_student=student, status=status).delete()
+        if symm:
+            student.remove_relationship(self, status, False)
+        return
+        
+    def get_relationships(self, status):
+        return self.relationships.filter(to_students__status=status, to_students__from_student=self)
+
     class Meta:
         permissions = (("can_view_student_list", "Can view the list of student view"),)
 
+RELATIONSHIP_FOLLOWING = 1
+RELATIONSHIP_BLOCKED = 2
+RELATIONSHIP_STATUSES = (
+    (RELATIONSHIP_FOLLOWING, 'Friends'),
+    (RELATIONSHIP_BLOCKED, 'Not Friends'),
+)
+
+class Relationship(models.Model):
+    from_student = models.ForeignKey(Student, related_name = 'from_students', on_delete=models.SET_NULL, null=True)
+    to_student = models.ForeignKey(Student, related_name = 'to_students', on_delete=models.SET_NULL, null=True)
+    status = models.IntegerField(choices =RELATIONSHIP_STATUSES)
 
 class Days(models.Model):
     """
