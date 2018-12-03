@@ -57,7 +57,7 @@ descriptions = [
 for i in range(0,7):
     a_className = classNames[i]
     a_courseNumber = fake.random_int(70000,80000)
-    a_description = description[i]
+    a_description = descriptions[i]
     a_credits = fake.random_int(3,4)
     a_rating = fake.random_int(100, 500)/100
     a_gened = genEds[fake.random_int(0,9)]
