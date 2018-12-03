@@ -1,4 +1,4 @@
- import textwrap
+import textwrap
 from datetime import timedelta
 
 # Create a super user to use the admin site.
@@ -57,7 +57,7 @@ descriptions = [
 for i in range(0,7):
     a_className = classNames[i]
     a_courseNumber = fake.random_int(70000,80000)
-    a_description = description[i]
+    a_description = descriptions[i]
     a_credits = fake.random_int(3,4)
     a_rating = fake.random_int(100, 500)/100
     a_gened = genEds[fake.random_int(0,9)]
@@ -80,7 +80,8 @@ times = [("8:00", "9:30"), ("10:00","11:30"), ("12:00", "13:30"), ("14:00","15:3
 
 #CourseInstances portion of the data model w/ fake data
 courseInstances = []
-for i in range(1,21):
+location = ["Herter 102", "South College W245", "CS 151", "Hasbrouck 124","Herter 102", "South College W245", "CS 151", "Hasbrouck 124","Herter 102", "South College W245", "CS 151", "Hasbrouck 124","Herter 102", "South College W245", "CS 151", "Hasbrouck 124","Herter 102", "South College W245", "CS 151", "Hasbrouck 124",]
+for i in range(0,20):
     a_name = courses[fake.random_int(0, len(courses) - 1)].name
     #TODO add in prof at the end
     a_classNumber = fake.random_int(1,1000)
@@ -88,9 +89,9 @@ for i in range(1,21):
     a_start = a_time[0]
     a_end = a_time[1]
     #TODO add in prerequisites at the end
-    a_semester = fake.text(6)
-    a_location = fake.bothify(text="## ??", letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    a_textbook = fake.text(25)
+    a_semester = "Spring"
+    a_location = location[i]
+    a_textbook = "TBD"
     a_students = fake.random_int(0,500)
     a_available = 500 - a_students
 
@@ -260,10 +261,25 @@ for student in students:
       
 course_reviews = []
 course_review = [
-    
+	"Good course, prepares you for the rest of the CS courses",
+	"Interesting material, hard exams",
+	"Long homeworks, but everything is graded fairly",
+	"Really enjoyed the group aspect of this class",
+	"Everyone should take this course. I learned so much",
+	"By far my favorite class at UMASS. Would reccomend",
+	"Avoid at all costs",
+	"This class literally gave me nightmares",
+	"This class was very alright",
+	"Don't even bother going to class, just read the book",
+	"One of the easiest classes, but not the most interesting",
+	"I spent 6 years of my life on homework for this class",
+	"The 5 multiple choice question online quizzes took me longer than 4 hours",
+	"My favorite part about this course was when it was over",
+	"Strong dislike",
+	"Does not drip",
 ]
-for i in range(1,50):
-    a_remarks = fake.text(200)
+for i in range(0,16):
+    a_remarks = course_review[i]
 
     review = CourseReview(
         remarks = a_remarks,
