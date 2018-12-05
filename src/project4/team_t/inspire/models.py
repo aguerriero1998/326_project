@@ -79,7 +79,7 @@ class Student(models.Model):
     """
     name = models.CharField(max_length=25)
     idnumber = models.IntegerField(primary_key=True, validators=[MaxValueValidator(40000000), MinValueValidator(30000000)])
-    phonenumber = models.CharField(max_length=20)
+    phonenumber = models.CharField(max_length=100)
     address = models.CharField(max_length=60)
     gender = models.CharField(max_length=25)
     
