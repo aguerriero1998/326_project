@@ -46,7 +46,7 @@ class CourseInstance(models.Model):
     semester = models.CharField(max_length=6)
     location = models.CharField(max_length=25)
     textbook = models.CharField(max_length=25)
-    students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
+    students = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)], blank=True, null=True)
     available = models.IntegerField(validators=[MaxValueValidator(500), MinValueValidator(0)])
 
     days = models.ManyToManyField("Days")

@@ -371,18 +371,20 @@ def register(request):
         f = UserCreationForm(request.POST)
         s = StudentForm(request.POST)
         if f.is_valid() and s.is_valid():
-            user = f.save()
-            student = s.save()
+            user = f.save(commit=False)
+            student = s.save(commit=False)
             student.idnumber = randint(30000000,40000000)
             
             first_last = list(map(lambda x: x.lower(), student.name.split()))
             first_last[0] = first_last[0][0]
             user.email = "".join(first_last) + str(randint(1, 123))
-            print(user.email)
-            
-            student.user = user
-            student.save()
             user.save()
+            student.user = user
+            user.student = student
+            user.save()
+            student.save()
+            
+        
             messages.success(request, 'Account created successfully')
             
             return HttpResponseRedirect(reverse('register'))

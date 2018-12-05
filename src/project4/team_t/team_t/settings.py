@@ -25,8 +25,7 @@ SECRET_KEY = '=e7pyg5!eyo+ko0jf6!!3i3x_)+k)8_kg3@w_77_*^zx*odozv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.spire-is-bad.com", "35.171.151.214", "ec2-35-171-151-214.compute-1.amazonaws.com", "35.171.251.232" ]
-
+ALLOWED_HOSTS = ["localhost", "www.spire-is-bad.com", "35.171.151.214", "ec2-35-171-151-214.compute-1.amazonaws.com", "35.171.251.232" ]
 
 # Application definition
 

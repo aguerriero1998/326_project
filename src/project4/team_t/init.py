@@ -92,8 +92,7 @@ for i in range(0,20):
     a_semester = "Spring"
     a_location = location[i]
     a_textbook = "TBD"
-    a_students = fake.random_int(0,500)
-    a_available = 500 - a_students
+    a_available = 50
 
 
     courseInstance = CourseInstance(
@@ -104,7 +103,7 @@ for i in range(0,20):
                                     semester = a_semester,
                                     location = a_location,
                                     textbook = a_textbook,
-                                    students = a_students,
+                                    students = 0,
                                     available = a_available,
     )
     courseInstance.save()
@@ -213,10 +212,11 @@ for course in courses:
 
 
 
-def get_course(courseInstance, course):
+def get_course(courseInstance):
     global courses
     for course in courses:
         if course.name == courseInstance.name:
+            print(f"course name : {course.name} courseInstance name : {courseInstance.name}")
             return course
 
 for courseInstance in courseInstances:
@@ -228,8 +228,10 @@ for courseInstance in courseInstances:
     if not courseInstance.days.count():
         courseInstance.days.add(days[2])
 
-    course = get_course(courseInstance, course)
-    courseInstance.course = course
+    course = get_course(courseInstance)
+    print(course)
+    print(courseInstance)
+    courseInstance.basecourse = course
     courseInstance.credits = course.credits
     courseInstance.save()
 
@@ -242,7 +244,6 @@ for courseInstance in courseInstances:
         courseInstance.save()
 
 
-    courseInstance.basecourse = courses[fake.random_int(0,len(courses) - 1 )]
     courseInstance.save()
 
 for student in students:
@@ -255,6 +256,9 @@ for student in students:
         courseInstance = courseInstances[fake.random_int(0, len(courseInstances) - 1 )]
         if len(student.coursesnow.all().filter(start=courseInstance.start)) == 0:
             student.coursesnow.add(courseInstance)
+            courseInstance.students += 1
+            courseInstance.available -= 1
+            courseInstance.save()
 
     for i in range(1, fake.random_int(1, 10)):
         student.shoppingcart.add(courseInstances[fake.random_int(0,len(courseInstances) - 1 )])
