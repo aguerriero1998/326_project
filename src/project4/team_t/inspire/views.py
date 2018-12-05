@@ -57,7 +57,16 @@ class Schedule(LoginRequiredMixin, generic.DetailView):
 
         return context
 
+@login_required
+def FriendsList(request, pk):
+    student = Student.objects.get(pk=pk)
+    friends = student.get_relationships(1)
+    context ={
+        'student': student,
+        'friends' : friends,
 
+    }
+    return render(request, "friends-list.html",context)    
 
 class ShoppingCartView(LoginRequiredMixin, generic.DetailView):
 
@@ -228,7 +237,14 @@ def unenroll_classes(request):
 
     student = Student.objects.all().filter(idnumber=student_id).get()
 
-    [student.coursesnow.remove(CourseInstance.objects.all().filter(classnumber=course).get()) for course in courses]
+    def f(student, course): 
+        student.coursesnow.remove(course)
+        course.students -= 1
+        course.available += 1
+        print(f'UnEnrolled {course.name} {course.prof}: Number of students enrolled {course.students} Number of spots available {course.available}')
+        course.save()
+
+    [f(student, CourseInstance.objects.all().filter(classnumber=course).get()) for course in courses]
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
 
@@ -241,10 +257,21 @@ def enroll_classes(request):
         potential_conflicts = student.coursesnow.all().filter(reduce(lambda x, y: x | y, [Q(days__daysoffered__contains=day['daysoffered']) for day in course.days.all().values()]))
 
         for pcourse in potential_conflicts:
-            if(pcourse.start <= course.start <= pcourse.end or pcourse.start <= course.end <= pcourse.end):
+            if (pcourse.start <= course.start <= pcourse.end or pcourse.start <= course.end <= pcourse.end) or (pcourse.available == 0):
                 return course
-            
-                
+            else:
+                pcourse.students += 1
+                pcourse.available -= 1
+
+                print(f'Enrolled {pcourse.name} {pcourse.prof}: Number of students enrolled {pcourse.students} Number of spots available {pcourse.available}')
+
+                pcourse.save()
+        
+        course.students += 1
+        course.available -= 1
+        print(f'Enrolled {course.name} {course.prof}: Number of students enrolled {course.students} Number of spots available {course.available}')
+        course.save()
+
         student.coursesnow.add(course)
         student.shoppingcart.remove(course)    
         return None    
@@ -273,7 +300,6 @@ def enroll_classes(request):
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
 
-@login_required
 def add_to_shopping_cart(request):
     
     courses = request.POST.getlist('courseId')
@@ -285,9 +311,6 @@ def add_to_shopping_cart(request):
     [student.shoppingcart.add(CourseInstance.objects.all().filter(classnumber=course).get()) for course in courses if (not student.shoppingcart.all().filter(classnumber=course).exists() and not student.coursesnow.all().filter(classnumber=course).exists())]
 
     return HttpResponseRedirect(reverse("shopping_cart", args=(student_id,)))
-
-
-
 
 
 

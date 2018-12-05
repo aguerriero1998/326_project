@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{%block title%}Professor List{%endblock%}
+
+{%block content%}
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Friends List</h1>
+
+	    </div>
+	    	
+
+
+            <table class = "table table-bordered ">
+                <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">Friends of {{student.name}} </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for friend in friends %}
+                                <tr>
+                                  <td scope="row"> {{ friend }} </a></td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+		
+{% endblock %}
