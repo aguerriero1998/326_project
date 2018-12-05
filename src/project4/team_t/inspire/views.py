@@ -2,6 +2,8 @@ from django.shortcuts import render
 from inspire.models import Course, CourseInstance, Professor, Student, Days, CourseReview, ProfessorReview
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required
@@ -13,7 +15,8 @@ from .forms import profReviewForm
 from .forms import addCourseForm
 from .forms import infoForm
 from django.forms import ModelForm
-from .forms import generalSearch, majorSearch, genedSearch
+from .forms import generalSearch, majorSearch, genedSearch, StudentForm
+from random import randint
 # Create your views here.
 
 @login_required
@@ -352,107 +355,32 @@ def search_results_general(request):
         #return HttpResponseRedirect('search-results')
 #return render(request, "search-results.html", {'the_course': course, 'form':form})
     return render(request, "search-results.html")
-    
-"""
-@login_required
-def search_results_major(request):
-    if(request.method == "POST"):
-        form = majorsearchform(request.POST)
-        if form.is_valid:
-            the_major_selection = course.objects.get(major = form.cleaned_data['sel_major'])
-            the_major_keyword = courses.filter(
-                            Q(coursename__contains = query) |
-                            Q(description__contains = query)).distinct()
-            return render(request, "search-results.html")
-    else:
-        return render(request, "search-results.html")
-    return render(request, "search-results.html")
+ 
 
-        #category
-
-
-
-@login_required
-def search_results_gened(request):
-    if(request.method == "POST"):
-        form = genedsearchform(request.POST)
-        if form.is_valid:
-            gened_sel = course.objects.get(gened = form.cleaned_data['gened_sel'])
-            gened_keyword = courses.filter(Q(coursename__contains = query) |
-                                           Q(description__contains = query)).distinct()
+def register(request):
+    if request.method == 'POST':
+        f = UserCreationForm(request.POST)
+        s = StudentForm(request.POST)
+        if f.is_valid() and s.is_valid():
+            user = f.save()
+            student = s.save()
+            student.idnumber = randint(30000000,40000000)
             
-            return render(request, "search-results.html")
-    else:
-          return render(request, "search-results.html")
-    return render(request, "search-results.html")
-                                           
-                                                        
-
-
-
-
-
-    
-#class search
-def general_Search(request):
-    if request.method == "POST":
-       gen_search_form = form(request.POST)
-    #form = forms.generalsearch(request.POST)
-    #query = request.GET.get('q')
-    #if request.method == 'POST':
-        #form = generalSearch(request.POST)
-       #courses = course.objects.all()
-       
-       #course = courses.filter(
-                            Q(coursename__contains = query) |
-                            Q(description__contains = query)).distinct()
-       if gen_search_form.is_valid():
-        the_course = Course.objects.get(name=gen_search_form.cleaned_data["course-keyword"])
-        return render_to_response("search-result.html",{'the_course': the_course },context_instance = RequestContext(request) )
-    else:
-        the_course = generalSearch()
-    return render_to_response("search-page.html", {'gen_search_form': gen_search_form},context_instance= RequestContext(request) )
-
-    
-
-            if(course_number == "is exactly"):
-                course_number = couse.objects.all().filter(coursenumber =request.POST.get("course_number")).get()
-            else if(course_number == "starts with"):
-                course_number = course.objects.filter(course__coursenumber__startswith = request.POST.get("course_number"))
-            else if(course_number == "greater than equal to"):
-                course_number = course.objects.filter(course__coursenumber >= request.POST.get("course_number"))
-            else if(course_number == "contains"):
-                course_number = course.objects.filter(course__coursenumber__contains = request.POST.get("course_number"))
+            first_last = list(map(lambda x: x.lower(), student.name.split()))
+            first_last[0] = first_last[0][0]
+            user.email = "".join(first_last) + str(randint(1, 123))
+            print(user.email)
             
+            student.user = user
+            student.save()
+            user.save()
+            messages.success(request, 'Account created successfully')
             
-
-#return HttpResponseRedirect("search-result")
-
-
-
-
-#context = RequestContext(request)
-
-
-#return render_to_response('search-results.html', context_instance = RequestContext(request))
-
-        class_number = courseInstance.objects.all().get(coursenumber = form.cleaned_data['class_number'])
-        course_subject = course.objects.all().get(major = form.cleaned_data['course_subject;])
-        course_number = course.object.all().get(coursenumber = form.cleaned_data['course_number'])
-                                                                            #make wuery set
-        course_keyword =
-        career_type = 
-        instructor_name = courseInstance.objects.all().get(prof = form.cleaned_data['instructor_name'])
-        credit_amount = course.objects.all().get(credits = form.cleaned_data['credit_amount'])
-        mode_of_instruction = course.objects.all().get(mode_of_instruction = form.cleaned_data['mode_of_instruction'])
-        rap = course.objects.get()(rap = form.cleaned_data['rap'])
-        cpe = course.objects.get()(cpe = form.cleaned_data['cpe'])
-        
-
+            return HttpResponseRedirect(reverse('register'))
+ 
     else:
-        form = generalsearch
-        context = {}
-        return render(request, "search-results.html")
-        the_course = Course.objects.get(name=gen_search_form.cleaned_data["course-keyword"])
-"""
+        f = UserCreationForm()
+        s = StudentForm()
+ 
+    return render(request, 'registration/register.html', {'form1': f, 'form2': s})
 

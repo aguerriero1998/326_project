@@ -46,6 +46,9 @@
                   </table>
                   <div class="row error">
                   <input id="submit-btn" class="btn btn-sm btn-primary btn-block" type="submit" value="Sign in" />
+                  <a href="{% url 'register' %}">
+                    <input type="button" class="btn btn-sm btn-primary btn-block" value="Register" />
+                  </a>
                 </div>
                   <input type="hidden" name="next" value="{{ next }}" />
                 </form>

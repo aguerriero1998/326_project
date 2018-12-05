@@ -3,6 +3,11 @@ from django.forms import ModelForm
 from inspire.models import Course, Student, CourseInstance
 
 
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ["name", "phonenumber", "address", "gender", "pronouns", "emergency"]
+
 class reviewForm(forms.Form):
     review = forms.CharField(label='Review ', max_length=1000, widget=forms.Textarea)
     

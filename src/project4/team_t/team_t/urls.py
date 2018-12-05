@@ -27,4 +27,4 @@ urlpatterns = [
 
 urlpatterns += [path("inspire/", include("inspire.urls"))]
 
-urlpatterns += [path("", RedirectView.as_view(url="/inspire/"))]
+urlpatterns += [path("", RedirectView.as_view(url="/inspire/")),]
