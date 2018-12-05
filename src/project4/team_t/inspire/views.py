@@ -57,7 +57,16 @@ class Schedule(LoginRequiredMixin, generic.DetailView):
 
         return context
 
+@login_required
+def FriendsList(request, pk):
+    student = Student.objects.get(pk=pk)
+    friends = student.get_relationships(1)
+    context ={
+        'student': student,
+        'friends' : friends,
 
+    }
+    return render(request, "friends-list.html",context)    
 
 class ShoppingCartView(LoginRequiredMixin, generic.DetailView):
 
