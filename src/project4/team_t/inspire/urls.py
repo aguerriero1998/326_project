@@ -27,7 +27,9 @@ urlpatterns = [
     path("unenroll-classes/", views.unenroll_classes, name="unenroll"),
     path("enroll-classes/", views.enroll_classes, name="enroll"),
     path("add-to-shopping-cart/", views.add_to_shopping_cart, name="add_to_shopping_cart"),
-    
+
+    path("friends/<int:pk>", views.FriendsList, name="friends_list"),
+              
     path("register/", views.register, name='register'),
               
     path("courses/add_course", views.add_course, name="add_course"),
