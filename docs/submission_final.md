@@ -112,6 +112,4 @@ Authentication/Authorization: A final up-to-date description of how users are au
 
 Team Choice: Our team choice addition was to deploy our application to a server. Our website has the domain www.spire-is-bad.com is accessible on the internet. To accommodate for this we added a url and view to register a user. We additionally had to obtain a domain name and correctly set up DNS records so that our application is able to be accessed at the domain.
 
-You should briefly mention your team choice component for your application. You should highlight any additions to your application that are part of your team choice, such as, URL routes, UI views, data model, to make it clear what your team choice addition is. 
-
 Conclusion: A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
