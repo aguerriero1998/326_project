@@ -4,7 +4,7 @@ Subtitle: Inspire
 
 Semester: Fall 2018
 
-Overview: Inspire is a web application modeled after SPire. With inspire, you will get the full Spire experience with a more intuitive and user friendly experience. Inspire allows students to leave course reviews and professor reviews once they have taken a class. 
+Overview: Inspire is a web application modeled after Spire. With inspire, you will get the full Spire experience with a more intuitive and user friendly experience. Inspire allows students to leave course reviews and professor reviews once they have taken a class. 
 
 Team Members: Akshaya Bhattarai,
 Alex Guerriero,
