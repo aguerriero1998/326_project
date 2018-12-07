@@ -106,7 +106,7 @@ URL Routes/Mappings:
 | inspire/student-info/<int:pk>/edit | Accessed from student info page - able to edit info on student. Accessed by single student and admins.                                       |
 | inspire/friends/<int:pk>           | Accessed from student info page- shows friends of student. Accessed by single student and admin Users                                        |
 | inspire/register                   | Accessed from the login page - allows someone to create a new student 
-                                                       |
+                                                       
 
 Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
 
