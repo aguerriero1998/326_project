@@ -4,7 +4,7 @@ Subtitle: Inspire
 
 Semester: Fall 2018
 
-Overview: A brief overview of your application. This will be based on what you are submitting as your final web application artifact. You should also mention why your application is innovative.
+Overview: Inspire is a web application modeled after SPire. With inspire, you will get the full Spire experience with a more intuitive and user friendly experience. Inspire allows students to leave course reviews and professor reviews once they have taken a class. 
 
 Team Members: Akshaya Bhattarai,
 Alex Guerriero,
