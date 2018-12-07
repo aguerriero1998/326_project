@@ -75,7 +75,7 @@ Course Instance Info- shows info on course instance - incuding enrollment, profe
  
 
 Data Model: 
-![example image](final_imgs/Data Model.png)
+![example image](final_imgs/datamodel.png)
 
 In our data model we have students, professors, courses, course instances, course reviews, professor reviews, and days of the week. Students are the students at UMass. Courses are the courses offered at UMass. Course instances are what students enroll in for each semester. Professors are the people who are teaching the course for the semester. Course and professor reviews are remarks left by students about their courses and professors. Days of the week are days in which a course instance is held. Courses are connected to a course instance and course reviews. Course instances are connected to the students taking that instance and the professor teaching that instance. Days of the week the course instance is offered is also connected to course instance. The professor is connected to their reviews. Lastly, all of the reviews are connected to a student who wrote the reviews.
 
